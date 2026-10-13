@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raio-X de churn para SaaS | Isabela Ignácio</title>
+<meta name="description" content="Seu SaaS perde clientes todo mês? Em 7 dias você sabe por quê. Raio-X de churn a partir da exportação do Stripe ou da sua plataforma de pagamento.">
+<meta property="og:title" content="Raio-X de churn para SaaS em 7 dias">
+<meta property="og:description" content="Churn real, cohort e as 3 primeiras ações, a partir da exportação dos seus pagamentos. Isabela Ignácio.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FAF8F3">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2315202E'/%3E%3Crect x='7' y='17' width='4' height='8' rx='1.5' fill='%237DBBBF'/%3E%3Crect x='14' y='12' width='4' height='13' rx='1.5' fill='%234F9FA5'/%3E%3Crect x='21' y='7' width='4' height='18' rx='1.5' fill='%23E2552D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F3; --alt: #F1EEE6; --card: #FFFFFF; --ink: #15202E; --ink-2: #3A4554; --muted: #646B78;
+    --line: #E3DFD4; --line-2: #D4CFC2; --brand: #1F6F78; --brand-deep: #165F68; --brand-soft: #E3F0F0;
+    --accent: #E2552D; --accent-hover: #CC4721; --dark: #121A24; --dark-2: #1A2430; --on-dark: #EEF1F4; --on-dark-muted: #9FA9B6;
+    --r: 16px; --max: 1120px; --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Geist', system-ui, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-style: italic; }
+  .mono { font-family: 'Geist Mono', monospace; }
+
+  header.bar { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 14px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -0.015em; }
+  .logo i { width: 30px; height: 30px; border-radius: 9px; background: var(--ink); display: grid; place-items: center; color: #fff; font-style: normal; font-size: 13px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 24px; border-radius: 999px; font: 500 16px/1 'Geist', sans-serif; text-decoration: none; white-space: nowrap; transition: transform .25s var(--ease), background .2s, box-shadow .25s, border-color .2s; }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 24px -12px rgba(226,85,45,.9); }
+  .btn-accent:hover { background: var(--accent-hover); transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid var(--line-2); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn-light { border: 1px solid #344152; color: var(--on-dark); }
+  .btn-sm { padding: 10px 16px; font-size: 14px; }
+
+  .hero { position: relative; padding: 52px 0 76px; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 44px 44px; opacity: .45; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 10%, transparent 75%); }
+  .hero .wrap { position: relative; display: grid; gap: 40px; }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; font-size: 13.5px; color: var(--ink-2); }
+  .kicker b { font-family: 'Geist Mono', monospace; font-size: 11.5px; font-weight: 500; color: #fff; background: var(--ink); padding: 2px 8px; border-radius: 99px; }
+  h1 { font-size: clamp(38px, 9.4vw, 72px); line-height: 1; letter-spacing: -0.045em; font-weight: 600; margin: 20px 0 20px; }
+  h1 .serif { color: var(--brand); letter-spacing: -0.02em; }
+  .lead { font-size: 18.5px; color: var(--ink-2); max-width: 54ch; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .fine { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+  .report { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px; box-shadow: 0 40px 80px -48px rgba(21,32,46,.5); transform: rotate(1deg); }
+  .report .top { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px dashed var(--line); }
+  .report .top b { font-size: 15px; }
+  .report .top span { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--muted); }
+  .r-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .r-row:last-of-type { border-bottom: 0; }
+  .r-row small { display: block; font-size: 12.5px; color: var(--muted); }
+  .r-row strong { font-size: 15.5px; font-weight: 500; }
+  .r-row .v { font-size: 26px; font-weight: 600; letter-spacing: -0.03em; }
+  .r-row .v.warn { color: var(--accent); }
+  .bar2 { height: 8px; border-radius: 99px; background: var(--alt); overflow: hidden; margin-top: 6px; }
+  .bar2 i { display: block; height: 100%; background: linear-gradient(90deg, #2F848C, #6FC0C9); border-radius: 99px; }
+  .report .src { font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+  section { padding: 80px 0; }
+  section.alt { background: var(--alt); }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); font-weight: 600; }
+  .tag::before { content: ''; width: 18px; height: 1.5px; background: currentColor; }
+  h2 { font-size: clamp(28px, 5.8vw, 46px); line-height: 1.05; letter-spacing: -0.037em; font-weight: 600; margin-top: 12px; max-width: 20ch; }
+  h2 .serif { color: var(--brand); letter-spacing: -0.01em; }
+  .sub { color: var(--ink-2); font-size: 18px; margin-top: 14px; max-width: 60ch; }
+
+  .gets { display: grid; gap: 12px; margin-top: 36px; }
+  .get { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .get .n { font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--brand); }
+  .get h3 { font-size: 20px; letter-spacing: -0.02em; font-weight: 600; margin-top: 8px; }
+  .get p { color: var(--ink-2); font-size: 16px; margin-top: 4px; }
+
+  .proof { background: var(--dark); color: var(--on-dark); }
+  .proof .tag { color: #7FC4CC; }
+  .proof h2 .serif { color: #7FC4CC; }
+  .proof .sub { color: var(--on-dark-muted); }
+  .nums { display: grid; gap: 1px; background: #2A3644; border: 1px solid #2A3644; border-radius: var(--r); overflow: hidden; margin-top: 36px; }
+  .nums div { background: var(--dark-2); padding: 24px 22px; }
+  .nums b { display: block; font-size: 44px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+  .nums b .serif { font-size: .55em; color: #7FC4CC; }
+  .nums div > span { display: block; color: var(--on-dark-muted); font-size: 15px; margin-top: 8px; }
+  .nums b .serif { display: inline; margin: 0 .06em; }
+  .quote { margin-top: 30px; padding: 24px; border-radius: var(--r); border: 1px solid #2A3644; }
+  .quote p { font-size: clamp(20px, 3.6vw, 26px); line-height: 1.3; letter-spacing: -0.015em; }
+  .quote p .serif { color: #7FC4CC; }
+  .quote small { display: block; margin-top: 12px; color: var(--on-dark-muted); font-size: 14px; }
+  .proof .ctas .btn-light { margin-top: 0; }
+
+  .steps { list-style: none; display: grid; gap: 0; counter-reset: s; margin-top: 36px; max-width: 760px; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 28px 54px; }
+  .steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 600; font-size: 14px; background: var(--ink); color: #fff; }
+  .steps li::after { content: ''; position: absolute; left: 16.5px; top: 40px; bottom: 4px; width: 1px; background: var(--line-2); }
+  .steps li:last-child::after { display: none; }
+  .steps h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.015em; padding-top: 3px; }
+  .steps p { color: var(--muted); font-size: 16px; margin-top: 3px; }
+
+  .plans { display: grid; gap: 14px; margin-top: 36px; }
+  .plan { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px 24px; display: flex; flex-direction: column; }
+  .plan.feat { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink), 0 30px 60px -40px rgba(21,32,46,.5); }
+  .plan .pill { align-self: flex-start; font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--accent); color: #fff; margin-bottom: 12px; }
+  .plan h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; }
+  .plan .price { margin-top: 10px; font-size: 40px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+  .plan .price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  .plan .was { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  .plan ul { list-style: none; margin: 18px 0 22px; flex: 1; }
+  .plan li { position: relative; padding-left: 24px; font-size: 15.5px; margin-top: 8px; }
+  .plan li::before { content: ''; position: absolute; left: 0; top: .3em; width: 15px; height: 15px; border-radius: 50%; background: var(--brand-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.9' fill='none' stroke='%231F6F78' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat; }
+  .plan .btn { width: 100%; }
+
+  .faq { max-width: 820px; margin-top: 30px; }
+  .faq details { border-top: 1px solid var(--line-2); }
+  .faq details:last-child { border-bottom: 1px solid var(--line-2); }
+  .faq summary { cursor: pointer; list-style: none; padding: 20px 0; display: flex; justify-content: space-between; gap: 18px; font-size: 18.5px; font-weight: 500; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ''; flex: none; width: 11px; height: 11px; margin-top: 8px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg); transition: transform .25s var(--ease); }
+  .faq details[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+  .faq p { color: var(--ink-2); padding-bottom: 20px; max-width: 64ch; }
+
+  .final { background: var(--dark); color: var(--on-dark); padding: 90px 0; }
+  .final .who { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .final .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; }
+  .final .who b { display: block; font-weight: 600; }
+  .final .who span { font-size: 14px; color: var(--on-dark-muted); }
+  .final h2 { font-size: clamp(34px, 7.6vw, 64px); line-height: 1; max-width: 16ch; margin: 0; }
+  .final h2 .serif { color: #7FC4CC; }
+  .final p { color: var(--on-dark-muted); margin: 18px 0 28px; font-size: 18px; max-width: 46ch; }
+  footer { background: var(--dark); color: var(--on-dark-muted); font-size: 13.5px; padding: 0 0 34px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-top: 22px; border-top: 1px solid #253141; }
+
+  .js .rv { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s var(--ease); }
+  .js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } }
+
+  @media (min-width: 820px) {
+    body { font-size: 18px; }
+    .wrap { padding: 0 36px; }
+    .hero { padding: 80px 0 110px; }
+    .hero .wrap { grid-template-columns: 1.15fr .85fr; align-items: center; gap: 60px; }
+    section { padding: 110px 0; }
+    .gets { grid-template-columns: repeat(2, 1fr); }
+    .nums { grid-template-columns: repeat(3, 1fr); }
+    .plans { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../"><i>II</i>Isabela Ignácio</a>
+    <a class="btn btn-accent btn-sm" href="#precos">Quero o Raio-X</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="kicker rv"><b>SaaS</b>Raio-X de churn em 7 dias</div>
+        <h1 class="rv">Seu SaaS perde clientes todo mês. <span class="serif">Em 7 dias você sabe por quê.</span></h1>
+        <p class="lead rv">Você me manda a exportação dos seus pagamentos. Eu devolvo o churn real, quanto tempo cada turma de clientes fica e quanto é desistência ou cartão recusado. Junto vêm as 3 primeiras ações para segurar mais gente.</p>
+        <div class="ctas rv">
+          <a class="btn btn-accent" href="#precos">Quero o Raio-X
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-ghost" href="../caso/">Ver o case MoneyMio</a>
+        </div>
+        <p class="fine rv">Sem acesso ao seu sistema. Uma planilha exportada já basta.</p>
+      </div>
+
+      <div class="report rv" aria-label="Exemplo do que o Raio-X entrega, com dados reais da MoneyMio">
+        <div class="top"><b>Raio-X de churn</b><span>exemplo real · MoneyMio</span></div>
+        <div class="r-row"><div><small>Cancelamentos por cartão recusado</small><strong>não foi o cliente que desistiu</strong></div><div class="v warn">2 em 3</div></div>
+        <div class="r-row"><div><small>Ainda pagam no 3º mês</small><div class="bar2"><i style="width:60%"></i></div></div><div class="v">60%</div></div>
+        <div class="r-row"><div><small>Onde a retenção se decide</small><strong>do 1º para o 2º mês: de 91% para 73%</strong></div><div class="v">M2</div></div>
+        <div class="r-row"><div><small>Churn mensal</small><strong>de 11,1% (nov a mar) para 5,5% (abr a set)</strong></div><div class="v">÷2</div></div>
+        <p class="src">Dados reais da MoneyMio, publicados com autorização.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <span class="tag rv">O que você descobre</span>
+      <h2 class="rv">Quatro respostas que <span class="serif">o seu painel não dá.</span></h2>
+      <div class="gets">
+        <div class="get rv"><div class="n">01</div><h3>O churn de verdade</h3><p>Calculado do jeito certo: quem pagava no começo do mês e saiu, dividido por quem pagava. Mês a mês, sem média que esconde o problema.</p></div>
+        <div class="get rv"><div class="n">02</div><h3>Desistência ou cartão recusado</h3><p>Os dois aparecem como cancelamento, mas pedem ações opostas. Separar os dois costuma mudar a prioridade do mês.</p></div>
+        <div class="get rv"><div class="n">03</div><h3>Quanto tempo cada turma fica</h3><p>O cohort mostra em que mês você perde mais gente e se as turmas novas estão ficando mais do que as antigas.</p></div>
+        <div class="get rv"><div class="n">04</div><h3>As 3 primeiras ações</h3><p>Em ordem de impacto, em linguagem de negócio, apresentadas numa conversa de 1 hora com você.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="wrap">
+      <span class="tag rv">Prova</span>
+      <h2 class="rv">O que esse raio-x mostrou <span class="serif">na MoneyMio.</span></h2>
+      <p class="sub rv">Um app de finanças por assinatura, com pagamentos em três contas diferentes do Stripe. O problema parecia gente desistindo. Os dados contaram outra história.</p>
+      <div class="nums rv">
+        <div><b>2<span class="serif"> em </span>3</b><span>cancelamentos entre julho e outubro foram por cartão recusado</span></div>
+        <div><b>60%</b><span>de cada turma ainda paga três meses depois do teste</span></div>
+        <div><b>11,1% → 5,5%</b><span>churn médio mensal, do primeiro para o segundo semestre</span></div>
+      </div>
+      <div class="quote rv">
+        <p>“A gente achava que o problema era cliente desistindo. A Isabela mostrou que <span class="serif">2 em cada 3 cancelamentos eram cartão recusado.</span> Mudou a primeira coisa que a gente faz quando alguém sai.”</p>
+        <small>Caio Cruz, sócio da MoneyMio</small>
+      </div>
+      <div class="ctas rv"><a class="btn btn-light" href="../caso/">Ver o case completo, com prints do painel</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="tag rv">Como funciona</span>
+      <h2 class="rv">Simples para você, <span class="serif">trabalho do meu lado.</span></h2>
+      <ol class="steps">
+        <li class="rv"><h3>Você exporta seus pagamentos</h3><p>Assinaturas e cobranças do Stripe, ou de qualquer plataforma que exporte planilha. Eu te mando o passo a passo. Pode tirar nome e e-mail dos clientes antes.</p></li>
+        <li class="rv"><h3>Eu analiso em até 7 dias</h3><p>Churn mês a mês, cohort, motivo de saída e onde a retenção se decide no seu caso.</p></li>
+        <li class="rv"><h3>Conversa de 1 hora</h3><p>Apresento os achados e as 3 primeiras ações. Você fica com o relatório.</p></li>
+        <li class="rv"><h3>Se quiser, acompanho todo mês</h3><p>Atualizo os números e você vê se as ações estão funcionando.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="alt" id="precos">
+    <div class="wrap">
+      <span class="tag rv">Preços</span>
+      <h2 class="rv">Para começar <span class="serif">sem risco grande.</span></h2>
+      <div class="plans">
+        <div class="plan feat rv">
+          <span class="pill">Piloto · 5 vagas</span>
+          <h3>Raio-X de churn</h3>
+          <div class="price">R$ 490</div>
+          <div class="was">Condição de lançamento, em troca de um depoimento.</div>
+          <ul><li>Churn mês a mês e cohort</li><li>Desistência separada de cartão recusado</li><li>3 ações em ordem de impacto</li><li>Conversa de 1 hora</li></ul>
+          <a class="btn btn-accent" href="mailto:isaignacio1@gmail.com?subject=Raio-X%20de%20churn%20(piloto)">Quero uma vaga de piloto</a>
+        </div>
+        <div class="plan rv">
+          <h3>Raio-X de churn</h3>
+          <div class="price">R$ 890</div>
+          <div class="was">Depois das vagas de piloto.</div>
+          <ul><li>Tudo do piloto</li><li>Relatório para compartilhar com sócios e time</li><li>Prioridade na agenda</li></ul>
+          <a class="btn btn-ghost" href="mailto:isaignacio1@gmail.com?subject=Raio-X%20de%20churn">Pedir o Raio-X</a>
+        </div>
+        <div class="plan rv">
+          <h3>Acompanhamento mensal</h3>
+          <div class="price">R$ 590<small> /mês</small></div>
+          <div class="was">Para quem já fez o Raio-X.</div>
+          <ul><li>Números atualizados todo mês</li><li>Leitura do que mudou e por quê</li><li>Uma conversa de 30 minutos por mês</li></ul>
+          <a class="btn btn-ghost" href="mailto:isaignacio1@gmail.com?subject=Acompanhamento%20mensal">Falar sobre o acompanhamento</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="tag rv">Perguntas frequentes</span>
+      <h2 class="rv">Antes de você perguntar.</h2>
+      <div class="faq rv">
+        <details><summary>Preciso dar acesso ao meu Stripe?</summary><p>Não. Uma exportação em planilha basta. Você pode tirar nome e e-mail dos clientes antes de mandar.</p></details>
+        <details><summary>Uso outra plataforma de pagamento. Serve?</summary><p>Serve, se ela exportar assinaturas e cobranças em planilha. Me diga qual é que eu confirmo antes de você pagar.</p></details>
+        <details><summary>Minha base é pequena. Vale a pena?</summary><p>Com poucas dezenas de assinantes os números oscilam muito. Se for o seu caso, eu aviso antes de você pagar.</p></details>
+        <details><summary>Quem é você?</summary><p>Especialista em dados, hoje em Product Analytics na Afya e antes no time de Growth da Stone, onde trabalhei com churn, reativação e testes A/B. Engenheira e mestre pela Unesp.</p></details>
+        <details><summary>Meus dados ficam seguros?</summary><p>Ficam só comigo e só para esta análise. Não são compartilhados com ninguém.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <div class="who rv">
+        <picture><source srcset="../img/isabela.webp" type="image/webp"><img src="../img/isabela.jpg" alt="" width="56" height="56"></picture>
+        <div><b>Isabela Ignácio</b><span>Especialista em dados · retenção e churn</span></div>
+      </div>
+      <h2 class="rv">Descubra para onde <span class="serif">seus clientes estão indo.</span></h2>
+      <p class="rv">Me conte o seu SaaS e qual plataforma de pagamento você usa. Eu respondo com o próximo passo.</p>
+      <div class="ctas rv">
+        <a class="btn btn-accent" href="mailto:isaignacio1@gmail.com?subject=Raio-X%20de%20churn">Mandar e-mail</a>
+        <a class="btn btn-light" href="../">Conhecer o meu trabalho</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Isabela Ignácio</span><span class="mono">isabelaignacio.com.br/saas</span></div></footer>
+
+<script>
+(function () {
+  var els = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>

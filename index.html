@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isabela Ignácio | Análise de dados, retenção e churn</title>
+<meta name="description" content="Especialista em dados (Stone, Afya). Descubro por que seus clientes vão embora: cohort, churn, painéis e testes A/B. Também professora de Cálculo e dados.">
+<meta property="og:title" content="Isabela Ignácio | Seus clientes estão indo embora. Eu descubro por quê.">
+<meta property="og:description" content="Análise de retenção, churn e painéis de indicadores. Caso real com dados da MoneyMio.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://isabelaignacio.com.br/">
+<meta name="theme-color" content="#FAF8F3">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2315202E'/%3E%3Crect x='7' y='17' width='4' height='8' rx='1.5' fill='%237DBBBF'/%3E%3Crect x='14' y='12' width='4' height='13' rx='1.5' fill='%234F9FA5'/%3E%3Crect x='21' y='7' width='4' height='18' rx='1.5' fill='%23E2552D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F3;
+    --alt: #F1EEE6;
+    --card: #FFFFFF;
+    --ink: #15202E;
+    --ink-2: #3A4554;
+    --muted: #646B78;
+    --line: #E3DFD4;
+    --line-2: #D4CFC2;
+    --brand: #1F6F78;
+    --brand-deep: #165F68;
+    --brand-soft: #E3F0F0;
+    --accent: #E2552D;
+    --accent-hover: #CC4721;
+    --dark: #121A24;
+    --dark-2: #1A2430;
+    --on-dark: #EEF1F4;
+    --on-dark-muted: #9FA9B6;
+    --r: 16px;
+    --max: 1120px;
+    --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Geist', system-ui, sans-serif; font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; }
+  img, svg { display: block; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  .mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- topo ---------- */
+  .announce { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 9px 16px; background: var(--ink); color: #fff; font-size: 14px; text-decoration: none; }
+  .announce b { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; background: var(--accent); padding: 2px 8px; border-radius: 99px; }
+  .announce i { font-style: normal; transition: transform .25s var(--ease); }
+  .announce:hover i { transform: translateX(4px); }
+  header.bar {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color .3s;
+  }
+  header.bar.scrolled { border-bottom-color: var(--line); }
+  .bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -0.015em; }
+  .logo i {
+    width: 30px; height: 30px; border-radius: 9px; background: var(--ink); display: grid; place-items: center;
+    color: #fff; font-style: normal; font-size: 13px; font-weight: 600; letter-spacing: 0;
+  }
+  nav.menu { display: none; gap: 30px; font-size: 15px; color: var(--muted); }
+  nav.menu a { text-decoration: none; transition: color .2s; }
+  nav.menu a:hover { color: var(--ink); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 15px 24px; border-radius: 999px; border: 0; cursor: pointer;
+    font: 500 16px/1 'Geist', sans-serif; text-decoration: none; white-space: nowrap;
+    transition: transform .25s var(--ease), box-shadow .25s, background .2s, border-color .2s;
+  }
+  .btn svg { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 24px -12px rgba(226,85,45,.9); }
+  .btn-accent:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(226,85,45,.9); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-2); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn-sm { padding: 10px 16px; font-size: 14px; }
+  .btn-light { background: transparent; color: var(--on-dark); border: 1px solid #344152; }
+  .btn-light:hover { border-color: var(--on-dark); }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 44px 0 72px; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 44px 44px; opacity: .45;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 10%, transparent 75%);
+            mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 10%, transparent 75%);
+  }
+  .hero .wrap { position: relative; display: grid; gap: 44px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    font-size: 13.5px; color: var(--ink-2);
+  }
+  .kicker b { width: 22px; height: 22px; border-radius: 50%; background: var(--brand-soft); display: grid; place-items: center; }
+  .kicker b::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); animation: pulse 2.4s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(31,111,120,.45); } 60% { box-shadow: 0 0 0 7px rgba(31,111,120,0); } }
+  .hero h1 {
+    font-size: clamp(40px, 10vw, 76px); line-height: .98; letter-spacing: -0.045em; font-weight: 600;
+    margin: 22px 0 22px;
+  }
+  .hero h1 .serif { font-style: italic; letter-spacing: -0.02em; color: var(--brand); font-size: 1.08em; line-height: .9; }
+  .hero .lead { font-size: 18.5px; color: var(--ink-2); max-width: 54ch; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .proof { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 34px; font-size: 14px; color: var(--muted); }
+  .proof span { display: inline-flex; align-items: center; gap: 8px; }
+  .proof span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--brand); }
+  .proof b { color: var(--ink); font-weight: 600; }
+
+  .hero-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px;
+    box-shadow: 0 40px 80px -48px rgba(21,32,46,.45), 0 2px 0 rgba(21,32,46,.02);
+    transform: rotate(-1.2deg);
+  }
+  .about-photo { position: relative; margin: 0 0 40px; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3.4; background: #2A3644; }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; }
+  .about-photo figcaption {
+    position: absolute; left: 14px; bottom: 14px; display: grid; gap: 1px; padding: 9px 14px; border-radius: 12px;
+    background: rgba(18,26,36,.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 13px; line-height: 1.3; color: #fff;
+  }
+  .about-photo figcaption span { color: #C5CDD6; font-size: 12px; }
+  .hc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .hc-top h2 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .hc-top p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .live { font-size: 11.5px; color: var(--brand); background: var(--brand-soft); padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
+  .hc-foot { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .hc-foot .big { font-size: 40px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+  .hc-foot .big small { font-size: 20px; color: var(--muted); font-weight: 500; }
+  .hc-foot p { font-size: 13px; color: var(--muted); max-width: 24ch; text-align: right; }
+
+  /* ---------- heatmap ---------- */
+  .heat { display: grid; gap: 3px; margin-top: 16px; font-size: 11.5px; }
+  .heat .h { color: var(--muted); text-align: center; font-family: 'Geist Mono', monospace; font-size: 10.5px; padding-bottom: 2px; }
+  .heat .rl { color: var(--muted); font-family: 'Geist Mono', monospace; font-size: 10.5px; display: flex; align-items: center; white-space: nowrap; padding-right: 6px; }
+  .heat .c {
+    height: 30px; border-radius: 5px; display: grid; place-items: center;
+    font-family: 'Geist Mono', monospace; font-size: 10.5px; font-weight: 500; position: relative;
+    opacity: 0; transform: scale(.6); transition: opacity .45s ease, transform .5s var(--ease), box-shadow .15s;
+  }
+  .heat .c.e { background: transparent !important; }
+  .in .heat .c, .heat.in .c { opacity: 1; transform: none; }
+  .heat .c:not(.e):hover { box-shadow: 0 0 0 2px var(--ink); z-index: 2; cursor: default; }
+  .heat-big .c { height: 34px; font-size: 11px; }
+  .heat-scroll { overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px 6px; }
+  .heat-scroll .heat { min-width: 620px; }
+  .scale { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: 14px; }
+  .scale i { display: flex; height: 8px; width: 140px; border-radius: 99px; overflow: hidden; }
+  .scale i span { flex: 1; }
+
+  .tip {
+    position: fixed; z-index: 50; pointer-events: none; opacity: 0; transform: translate(-50%, calc(-100% - 12px));
+    background: var(--ink); color: #fff; font-size: 12.5px; line-height: 1.35; padding: 8px 11px; border-radius: 8px;
+    white-space: nowrap; transition: opacity .12s; box-shadow: 0 8px 20px -8px rgba(0,0,0,.4);
+  }
+  .tip b { font-weight: 600; }
+  .tip.on { opacity: 1; }
+
+  /* ---------- seções ---------- */
+  section { padding: 84px 0; position: relative; }
+  section.alt { background: var(--alt); }
+  .head { max-width: 720px; margin-bottom: 44px; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); font-weight: 600; }
+  .tag::before { content: ''; width: 18px; height: 1.5px; background: currentColor; }
+  .head h2 { font-size: clamp(30px, 6.2vw, 50px); line-height: 1.04; letter-spacing: -0.038em; font-weight: 600; margin-top: 14px; }
+  .head h2 .serif { font-style: italic; color: var(--brand); letter-spacing: -0.01em; }
+  .head p { color: var(--ink-2); margin-top: 16px; font-size: 18px; }
+
+  /* sintomas */
+  .pains { display: grid; gap: 0; counter-reset: p; }
+  .pain { counter-increment: p; display: grid; grid-template-columns: 48px 1fr; gap: 4px 12px; padding: 26px 0; border-top: 1px solid var(--line-2); }
+  .pain:last-child { border-bottom: 1px solid var(--line-2); }
+  .pain::before { content: '0' counter(p); font-family: 'Geist Mono', monospace; font-size: 14px; color: var(--brand); padding-top: 6px; }
+  .pain p { font-size: clamp(20px, 3.6vw, 26px); line-height: 1.3; letter-spacing: -0.02em; font-weight: 500; }
+  .pain p em { font-style: normal; color: var(--muted); }
+  .bridge { margin-top: 36px; font-size: 20px; color: var(--ink-2); max-width: 46ch; }
+  .bridge .serif { font-style: italic; font-size: 1.25em; color: var(--ink); }
+
+  /* caso */
+  .case-intro { display: grid; gap: 26px; margin-bottom: 52px; }
+  .case-intro .facts { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: var(--r); background: var(--card); overflow: hidden; }
+  .case-intro .facts div { padding: 16px 14px; border-left: 1px solid var(--line); }
+  .case-intro .facts div:first-child { border-left: 0; }
+  .case-intro .facts b { display: block; font-size: 22px; letter-spacing: -0.03em; font-weight: 600; line-height: 1.1; }
+  .case-intro .facts span { font-size: 13px; color: var(--muted); }
+  .q { display: grid; gap: 28px; padding: 40px 0; border-top: 1px solid var(--line); }
+  .q-label { font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--brand); }
+  .q h3 { font-size: clamp(24px, 4.6vw, 34px); line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; margin-top: 8px; }
+  .q .answer { margin-top: 16px; color: var(--ink-2); font-size: 17.5px; }
+  .q .answer strong { color: var(--ink); font-weight: 600; background: linear-gradient(transparent 62%, #F6D9CC 62%); }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; }
+  .panel-title { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14px; font-weight: 600; }
+  .panel-title span { font-weight: 400; color: var(--muted); font-size: 12.5px; }
+  .table-view { margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .table-view summary { cursor: pointer; display: inline-block; }
+  .table-view table { border-collapse: collapse; margin-top: 10px; font-family: 'Geist Mono', monospace; font-size: 12px; }
+  .table-view td, .table-view th { padding: 4px 10px 4px 0; text-align: left; border-bottom: 1px solid var(--line); }
+
+  #barras svg { width: 100%; height: auto; overflow: visible; margin-top: 10px; }
+  #barras .b { fill: #4F9FA5; transition: fill .15s; }
+  #barras .b.late { fill: var(--brand-deep); }
+  #barras .b:hover, #barras .hit:hover + .b { fill: var(--ink); }
+  #barras text { font-family: 'Geist Mono', monospace; font-size: 11px; fill: var(--muted); }
+  #barras .lbl { fill: var(--ink); font-weight: 500; }
+  #barras .avg { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  #barras .ref { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 2 4; opacity: .9; }
+  #barras .grow { transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); transition: transform .9s var(--ease); }
+  #barras.in .grow { transform: scaleY(1); }
+
+  .split { display: grid; gap: 12px; }
+  .stat-hero { background: var(--dark); color: var(--on-dark); border-radius: var(--r); padding: 28px 24px; position: relative; overflow: hidden; }
+  .stat-hero .num { font-size: clamp(72px, 18vw, 120px); line-height: .9; letter-spacing: -0.06em; font-weight: 600; }
+  .stat-hero .num .serif { font-style: italic; font-size: .5em; letter-spacing: -0.01em; color: #7FC4CC; margin: 0 .08em; }
+  .stat-hero p { color: var(--on-dark-muted); margin-top: 14px; max-width: 32ch; }
+  .dots { display: flex; gap: 8px; margin-top: 22px; }
+  .dots i { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #3B4A5B; display: grid; place-items: center; }
+  .dots i.on { background: var(--accent); border-color: var(--accent); }
+  .dots i svg { width: 15px; height: 15px; }
+  .decision { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; }
+  .decision { display: flex; flex-direction: column; justify-content: center; }
+  .decision .from, .decision .to { display: grid; gap: 6px; }
+  .decision p { font-size: 16.5px; line-height: 1.45; }
+  .decision .to { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .decision small { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .decision .from p { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-2); }
+  .decision .to p { font-weight: 500; }
+  .case-cta {
+    margin-top: 44px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    padding: 22px 24px; border-radius: var(--r); background: var(--ink); color: #fff; text-decoration: none;
+    transition: transform .3s var(--ease), box-shadow .3s;
+  }
+  .case-cta:hover { transform: translateY(-3px); box-shadow: 0 24px 40px -24px rgba(21,32,46,.7); }
+  .case-cta span { font-size: 18px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.35; }
+  .case-cta small { display: block; font-family: 'Geist Mono', monospace; font-size: 12px; color: #7FC4CC; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .case-cta svg { flex: none; width: 40px; height: 40px; padding: 11px; border-radius: 50%; background: var(--accent); }
+  .role { margin-top: 16px; display: grid; gap: 14px; padding: 22px 24px; border-radius: var(--r); background: var(--brand-soft); color: var(--brand-deep); }
+  .role b { font-weight: 600; }
+  .role p { font-size: 16px; color: var(--ink-2); }
+  .note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+  /* ofertas */
+  .offers { display: grid; gap: 14px; }
+  .offer {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px 24px 24px;
+    display: flex; flex-direction: column; transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
+  }
+  .offer:hover { transform: translateY(-4px); border-color: var(--line-2); box-shadow: 0 28px 50px -34px rgba(21,32,46,.45); }
+  .offer.feat { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+  .offer .top { display: flex; justify-content: space-between; align-items: center; }
+  .offer .n { font-family: 'Geist Mono', monospace; color: var(--brand); font-size: 13px; }
+  .pill { font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--ink); color: #fff; }
+  .offer h3 { font-size: 25px; letter-spacing: -0.03em; font-weight: 600; margin-top: 14px; line-height: 1.15; }
+  .offer .for { color: var(--ink-2); margin-top: 10px; font-size: 16px; }
+  .offer h4 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 22px; }
+  .offer ul { list-style: none; margin-top: 10px; flex: 1; }
+  .offer li { position: relative; padding-left: 26px; font-size: 15.5px; margin-top: 9px; line-height: 1.45; }
+  .offer li::before {
+    content: ''; position: absolute; left: 0; top: .2em; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--brand-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.9' fill='none' stroke='%231F6F78' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;
+  }
+  .offer .go {
+    margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center;
+    font-weight: 500; text-decoration: none; color: var(--ink);
+  }
+  .offer .go svg { width: 18px; height: 18px; transition: transform .25s var(--ease); }
+  .offer .go:hover svg { transform: translateX(4px); }
+
+  /* método */
+  .steps { list-style: none; display: grid; gap: 0; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; padding: 0 0 30px 52px; }
+  .steps li::before {
+    content: counter(s); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 600; font-size: 14px; background: var(--ink); color: #fff;
+  }
+  .steps li::after { content: ''; position: absolute; left: 16.5px; top: 40px; bottom: 6px; width: 1px; background: var(--line-2); }
+  .steps li:last-child::after { display: none; }
+  .steps h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; padding-top: 3px; }
+  .steps p { color: var(--muted); margin-top: 4px; font-size: 16.5px; }
+
+  /* sobre (escuro) */
+  .about { background: var(--dark); color: var(--on-dark); }
+  .about .tag { color: #7FC4CC; }
+  .about .head p { color: var(--on-dark-muted); }
+  .about .head h2 .serif { color: #7FC4CC; }
+  .about-grid { display: grid; gap: 48px; }
+  .quote { font-size: clamp(24px, 4.4vw, 34px); line-height: 1.22; letter-spacing: -0.02em; }
+  .quote .serif { font-style: italic; color: #7FC4CC; font-size: 1.12em; }
+  .quote-by { margin-top: 16px; font-size: 14px; color: var(--on-dark-muted); }
+  .creds { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #2A3644; border: 1px solid #2A3644; border-radius: var(--r); overflow: hidden; margin-top: 36px; }
+  .creds div { background: var(--dark-2); padding: 20px 18px; }
+  .creds b { display: block; font-size: 26px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
+  .creds span { font-size: 13.5px; color: var(--on-dark-muted); }
+  .tl { list-style: none; border-left: 1px solid #2E3A49; margin-left: 5px; }
+  .tl li { position: relative; padding: 0 0 26px 24px; }
+  .tl li::before { content: ''; position: absolute; left: -6px; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--dark); border: 2px solid #4F9FA5; }
+  .tl li.now::before { background: #7FC4CC; border-color: #7FC4CC; box-shadow: 0 0 0 5px rgba(127,196,204,.15); }
+  .tl .when { font-family: 'Geist Mono', monospace; font-size: 12.5px; color: var(--on-dark-muted); }
+  .tl h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin-top: 2px; }
+  .tl p { color: var(--on-dark-muted); font-size: 15.5px; margin-top: 3px; }
+
+  /* docência */
+  .teach { display: grid; gap: 40px; }
+  .subjects { display: flex; flex-wrap: wrap; gap: 8px; }
+  .subjects span { padding: 9px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: 15px; }
+  .teach h3 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 14px; }
+  .xp { list-style: none; }
+  .xp li { padding: 16px 0; border-top: 1px solid var(--line-2); }
+  .xp li:last-child { border-bottom: 1px solid var(--line-2); }
+  .xp b { font-weight: 600; display: block; }
+  .xp span { color: var(--muted); font-size: 15.5px; }
+  .pubs { margin-top: 26px; }
+  .pubs summary { cursor: pointer; font-weight: 500; list-style: none; display: flex; align-items: center; gap: 8px; }
+  .pubs summary::-webkit-details-marker { display: none; }
+  .pubs summary::before { content: '+'; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-2); display: grid; place-items: center; font-size: 15px; }
+  .pubs[open] summary::before { content: '–'; }
+  .pubs ul { list-style: none; margin-top: 10px; }
+  .pubs li { font-size: 15px; color: var(--ink-2); padding: 10px 0; border-bottom: 1px solid var(--line); font-style: italic; }
+
+  /* faq */
+  .faq { display: grid; gap: 0; max-width: 820px; }
+  .faq details { border-top: 1px solid var(--line-2); }
+  .faq details:last-child { border-bottom: 1px solid var(--line-2); }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 22px 0; display: flex; justify-content: space-between; gap: 20px;
+    font-size: 19px; font-weight: 500; letter-spacing: -0.01em;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ''; flex: none; width: 12px; height: 12px; margin-top: 8px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg); transition: transform .25s var(--ease); }
+  .faq details[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+  .faq details p { color: var(--ink-2); padding: 0 0 22px; max-width: 64ch; }
+
+  /* cta final */
+  .final { background: var(--dark); color: var(--on-dark); padding: 96px 0; overflow: hidden; }
+  .final h2 { font-size: clamp(38px, 9vw, 84px); line-height: .98; letter-spacing: -0.05em; font-weight: 600; max-width: 14ch; }
+  .final h2 .serif { font-style: italic; color: #7FC4CC; letter-spacing: -0.02em; }
+  .final p { color: var(--on-dark-muted); font-size: 18px; margin: 22px 0 32px; max-width: 46ch; }
+  .final .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .final .mail { margin-top: 30px; font-size: 15px; color: var(--on-dark-muted); }
+  .final .mail a { color: var(--on-dark); }
+  footer { background: var(--dark); color: var(--on-dark-muted); font-size: 13.5px; padding: 0 0 36px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-top: 24px; border-top: 1px solid #253141; }
+
+  /* barra de contato fixa no celular */
+  .dock {
+    position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: var(--ink); color: #fff; border-radius: 999px; padding: 8px 8px 8px 18px;
+    box-shadow: 0 18px 40px -16px rgba(0,0,0,.55);
+    transform: translateY(140%); transition: transform .45s var(--ease);
+  }
+  .dock.on { transform: none; }
+  .dock span { font-size: 14px; line-height: 1.2; }
+  .dock span small { display: block; color: #9FA9B6; font-size: 12px; }
+
+  /* movimento */
+  .js .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s var(--ease); }
+  .js .rv.in { opacity: 1; transform: none; }
+  .js .rv.d1 { transition-delay: .08s; } .js .rv.d2 { transition-delay: .16s; } .js .rv.d3 { transition-delay: .24s; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .rv, .heat .c, #barras .grow { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .kicker b::after { animation: none; }
+  }
+
+  @media (min-width: 820px) {
+    body { font-size: 18px; }
+    .wrap { padding: 0 36px; }
+    nav.menu { display: flex; }
+    .hero { padding: 72px 0 110px; }
+    .hero .wrap { grid-template-columns: 1.15fr .85fr; align-items: center; gap: 56px; }
+    section { padding: 120px 0; }
+    .case-intro { grid-template-columns: 1.2fr 1fr; align-items: end; gap: 48px; }
+    .q { grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; padding: 56px 0; }
+    .split { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .offers { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .how { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; }
+    .how .head { position: sticky; top: 100px; }
+    .about-grid { grid-template-columns: 1.1fr .9fr; gap: 72px; }
+    .teach { grid-template-columns: 1fr 1fr; gap: 64px; }
+    .role { grid-template-columns: auto 1fr; gap: 24px; align-items: baseline; }
+    .dock { display: none; }
+    .final { padding: 140px 0; }
+  }
+</style>
+</head>
+<body>
+
+<a class="announce" href="saas/"><b>Novo</b><span>Raio-X de churn para SaaS em 7 dias</span><i aria-hidden="true">→</i></a>
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="logo" href="#"><i>II</i>Isabela Ignácio</a>
+    <nav class="menu" aria-label="Seções">
+      <a href="saas/">Para SaaS</a>
+      <a href="#caso">Caso real</a>
+      <a href="#formatos">Formatos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#docencia">Docência</a>
+    </nav>
+    <a class="btn btn-accent btn-sm" href="#contato">Falar comigo</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. HERO: dor + promessa + prova -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <div class="kicker rv"><b></b>Especialista em dados · retenção e churn</div>
+        <h1 id="h1" class="rv d1">Seus clientes estão indo embora. <span class="serif">Eu descubro por quê.</span></h1>
+        <p class="lead rv d2">Transformo os dados de pagamento, uso e CRM do seu negócio em respostas claras: quem sai, quando sai e o que fazer antes que saia.</p>
+        <div class="ctas rv d3">
+          <a class="btn btn-accent" href="#contato">Quero entender meus números
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-ghost" href="#caso">Ver um caso real</a>
+        </div>
+        <div class="proof rv d3">
+          <span>Hoje em <b>Product Analytics na Afya</b></span>
+          <span>Antes, <b>Growth na Stone</b></span>
+          <span><b>Mestre</b> pela Unesp</span>
+        </div>
+      </div>
+
+      <div class="hero-card rv d2" aria-label="Amostra de análise de retenção">
+        <div class="hc-top">
+          <div>
+            <h2>Retenção por turma de clientes</h2>
+            <p>% que ainda paga, mês a mês</p>
+          </div>
+          <span class="live mono">dados reais</span>
+        </div>
+        <div class="heat" id="heatMini" role="img" aria-label="Mapa de retenção por turma, de novembro de 2025 a junho de 2026"></div>
+        <div class="hc-foot">
+          <div class="big">60<small>%</small></div>
+          <p>de cada turma ainda paga no 3º mês. Cliente: MoneyMio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SINTOMAS: o leitor se reconhece -->
+  <section class="alt" aria-labelledby="h-dor">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Soa familiar?</span>
+        <h2 id="h-dor">A receita cai e ninguém sabe dizer <span class="serif">por quê.</span></h2>
+      </div>
+      <div class="pains">
+        <div class="pain rv"><p>Você vê a receita cair, <em>mas não sabe se falta cliente novo ou se sobra cliente saindo.</em></p></div>
+        <div class="pain rv"><p>O painel tem dezenas de números <em>e nenhum responde à pergunta que importa.</em></p></div>
+        <div class="pain rv"><p>A campanha de retenção vai para quem nunca quis cancelar: <em>o cartão é que foi recusado.</em></p></div>
+      </div>
+      <p class="bridge rv">Cada um desses problemas tem uma pergunta por trás. <span class="serif">Meu trabalho começa por ela.</span></p>
+    </div>
+  </section>
+
+  <!-- 3. CASO REAL: prova com dados -->
+  <section id="caso" aria-labelledby="h-caso">
+    <div class="wrap">
+      <div class="case-intro">
+        <div class="head rv" style="margin-bottom:0">
+          <span class="tag">Caso real · MoneyMio</span>
+          <h2 id="h-caso">Um app por assinatura, três contas de pagamento e uma pergunta: <span class="serif">por que os clientes saem?</span></h2>
+          <p>Os pagamentos estavam espalhados em três contas do Stripe, o tráfego pago vinha da Meta e não existia uma visão única de quem ficava. Organizei a análise em três perguntas.</p>
+        </div>
+        <div class="facts rv d1">
+          <div><b>3</b><span>contas de pagamento</span></div>
+          <div><b>11</b><span>turmas de clientes</span></div>
+          <div><b>11</b><span>meses de histórico</span></div>
+        </div>
+      </div>
+
+      <!-- pergunta 1 -->
+      <div class="q">
+        <div class="rv">
+          <div class="q-label">Pergunta 01</div>
+          <h3>Quanto tempo cada turma de clientes fica?</h3>
+          <p class="answer">Em média, <strong>60% de cada turma ainda paga três meses depois</strong> do fim do teste. A maior perda acontece entre o primeiro e o segundo mês: é ali que a retenção se decide.</p>
+        </div>
+        <div class="panel rv d1">
+          <div class="panel-title">Retenção por turma <span>% que ainda pagava em cada mês</span></div>
+          <div class="heat-scroll"><div class="heat heat-big" id="heatFull" role="img" aria-label="Mapa de retenção completo por turma, novembro de 2025 a setembro de 2026"></div></div>
+          <div class="scale"><span>menos</span><i id="scaleBar"></i><span>mais</span></div>
+          <details class="table-view"><summary>Ver como tabela</summary><div id="heatTable"></div></details>
+        </div>
+      </div>
+
+      <!-- pergunta 2 -->
+      <div class="q">
+        <div class="rv">
+          <div class="q-label">Pergunta 02</div>
+          <h3>O churn está melhorando ou piorando?</h3>
+          <p class="answer">Melhorando. O churn mensal caiu de <strong>uma média de 11% entre novembro e março</strong> para cerca de 5,5% de abril a setembro, perto da referência de 5% ao mês.</p>
+        </div>
+        <div class="panel rv d1" id="barras">
+          <div class="panel-title">Churn mensal <span>% da base que cancelou no mês</span></div>
+          <div id="barsSvg"></div>
+          <details class="table-view"><summary>Ver como tabela</summary><div id="barsTable"></div></details>
+        </div>
+      </div>
+
+      <!-- pergunta 3 -->
+      <div class="q">
+        <div class="rv">
+          <div class="q-label">Pergunta 03</div>
+          <h3>Quem cancela quis mesmo cancelar?</h3>
+          <p class="answer">Não. A maior parte dos cancelamentos recentes não foi decisão do cliente: <strong>foi cartão recusado.</strong> Isso muda a primeira ação.</p>
+        </div>
+        <div class="split">
+          <div class="stat-hero rv d1">
+            <div class="num">2<span class="serif">em</span>3</div>
+            <p>cancelamentos entre julho e outubro vieram de cartão recusado.</p>
+            <div class="dots" aria-hidden="true">
+              <i class="on"><svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="4" width="13" height="9" rx="1.5" stroke="#fff" stroke-width="1.4"/><path d="M1.5 7h13" stroke="#fff" stroke-width="1.4"/></svg></i>
+              <i class="on"><svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="4" width="13" height="9" rx="1.5" stroke="#fff" stroke-width="1.4"/><path d="M1.5 7h13" stroke="#fff" stroke-width="1.4"/></svg></i>
+              <i></i>
+            </div>
+          </div>
+          <div class="decision rv d2">
+            <div class="from"><small>Antes</small><p>Todo cancelamento parecia desistência do cliente.</p></div>
+            <div class="to"><small>Depois</small><p>O painel separa os dois casos e avisa o cartão recusado: a primeira ação passa a ser recuperar o pagamento.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <a class="case-cta rv" href="caso/">
+        <span><small>Case completo</small>Prints do painel, as métricas que eu defini e o que mudou na decisão</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="role rv">
+        <b>Meu papel</b>
+        <p>Definição das perguntas, das métricas e da leitura de churn e cohort, que viraram um painel único organizado por pergunta: visão geral, receita, churn, aquisição e clientes.</p>
+      </div>
+      <p class="note">Números publicados com autorização da MoneyMio. Valores em reais omitidos.</p>
+    </div>
+  </section>
+
+  <!-- 4. FORMATOS: a oferta -->
+  <section class="alt" id="formatos" aria-labelledby="h-form">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Formatos</span>
+        <h2 id="h-form">Três formas de trabalhar comigo, <span class="serif">com entrega clara.</span></h2>
+      </div>
+      <div class="offers">
+        <article class="offer feat rv">
+          <div class="top"><span class="n">01</span><span class="pill">Por onde começar</span></div>
+          <h3>Diagnóstico de retenção</h3>
+          <p class="for">Para negócios de assinatura ou recorrência que perdem clientes e não sabem por quê.</p>
+          <h4>Você recebe</h4>
+          <ul>
+            <li>Cohort: quanto tempo cada turma de clientes fica</li>
+            <li>Os motivos de saída, separados entre desistência e falha de pagamento</li>
+            <li>Plano de ação em ordem de impacto</li>
+          </ul>
+          <a class="go" href="mailto:isaignacio1@gmail.com?subject=Diagn%C3%B3stico%20de%20reten%C3%A7%C3%A3o">Pedir proposta
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+        <article class="offer rv d1">
+          <div class="top"><span class="n">02</span></div>
+          <h3>Painel de indicadores</h3>
+          <p class="for">Para quem ainda decide no feeling porque os números estão espalhados.</p>
+          <h4>Você recebe</h4>
+          <ul>
+            <li>Painel em Power BI ou Looker Studio organizado por pergunta</li>
+            <li>Ligado às suas fontes: pagamentos, CRM ou planilhas</li>
+            <li>Leitura dos números com você na entrega</li>
+          </ul>
+          <a class="go" href="mailto:isaignacio1@gmail.com?subject=Painel%20de%20indicadores">Pedir proposta
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+        <article class="offer rv d2">
+          <div class="top"><span class="n">03</span></div>
+          <h3>Aulas e treinamentos</h3>
+          <p class="for">Para faculdades, pós-graduações, equipes e alunos.</p>
+          <h4>Temas</h4>
+          <ul>
+            <li>Cálculo Diferencial e Integral para Engenharia</li>
+            <li>SQL, Python e Power BI aplicados a negócio</li>
+            <li>Métricas de produto e testes A/B</li>
+          </ul>
+          <a class="go" href="#docencia">Ver docência
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. COMO FUNCIONA -->
+  <section aria-labelledby="h-how">
+    <div class="wrap how">
+      <div class="head rv">
+        <span class="tag">Como funciona</span>
+        <h2 id="h-how">Sem surpresa no meio do caminho.</h2>
+        <p>Você sabe o que vai receber, quando e por quanto antes de eu abrir o primeiro arquivo.</p>
+      </div>
+      <ol class="steps">
+        <li class="rv"><h3>Conversa inicial</h3><p>Você conta o contexto do negócio e a pergunta que quer responder.</p></li>
+        <li class="rv"><h3>Proposta fechada</h3><p>Escopo, prazo e valor definidos por escrito antes de começar.</p></li>
+        <li class="rv"><h3>Análise com sigilo</h3><p>Acesso só ao que for necessário. Seus dados não saem do projeto.</p></li>
+        <li class="rv"><h3>Entrega explicada</h3><p>Os achados em linguagem de negócio, com o que fazer primeiro.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. SOBRE: autoridade e história -->
+  <section class="about" id="sobre" aria-labelledby="h-sobre">
+    <div class="wrap about-grid">
+      <div>
+        <div class="head rv" style="margin-bottom:28px">
+          <span class="tag">Sobre</span>
+          <h2 id="h-sobre">Engenheira de formação. <span class="serif">Especialista em dados por escolha.</span></h2>
+        </div>
+        <p class="quote rv">Entendo o lado técnico do dado <span class="serif">e o impacto humano e de negócio</span> por trás dele.</p>
+        <p class="quote-by rv">Foi no mestrado, analisando dados experimentais, que a análise virou profissão. Depois vieram People Analytics na Ambev, Growth na Stone e Product Analytics na Afya.</p>
+        <div class="creds rv">
+          <div><b>Stone</b><span>modelo de predição de churn e testes A/B</span></div>
+          <div><b>2.300</b><span>colaboradores no People Analytics da Ambev</span></div>
+          <div><b>Mestre</b><span>em Ciências Térmicas pela Unesp</span></div>
+          <div><b>7</b><span>publicações científicas</span></div>
+        </div>
+      </div>
+      <div>
+        <figure class="about-photo rv">
+          <picture><source srcset="img/isabela.webp" type="image/webp"><img src="img/isabela.jpg" alt="Isabela Ignácio" width="900" height="907" loading="lazy"></picture>
+          <figcaption><b>Isabela Ignácio</b><span>Especialista em dados · Afya</span></figcaption>
+        </figure>
+      <ol class="tl">
+        <li class="now rv"><span class="when">2026 a hoje</span><h3>Afya · Senior Data Analyst</h3><p>Product Analytics: funis, engajamento, retenção, testes A/B e inferência causal.</p></li>
+        <li class="rv"><span class="when">2024 a 2026</span><h3>Stone · Senior Data Analyst</h3><p>Time fundador do Consumer Banking: churn, reativação, CRM e predição de cancelamento.</p></li>
+        <li class="rv"><span class="when">2022 a 2024</span><h3>Timbro Trading · Analista</h3><p>Painéis em Power BI e SQL Server, Scrum e treinamentos para cerca de 85 pessoas.</p></li>
+        <li class="rv"><span class="when">2021 a 2022</span><h3>Ambev · People Analytics</h3><p>Indicadores de pessoas e plano de redução de turnover.</p></li>
+        <li class="rv"><span class="when">2019 a 2021</span><h3>Unesp e FAPESP · Mestrado</h3><p>Pesquisa em transferência de calor, com dados experimentais em Python.</p></li>
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DOCÊNCIA: para coordenadores -->
+  <section class="alt" id="docencia" aria-labelledby="h-doc">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Para coordenadores de curso</span>
+        <h2 id="h-doc">Também em <span class="serif">sala de aula.</span></h2>
+        <p>Experiência como professora de Cálculo na graduação, prática diária com dados em grandes empresas e didática para traduzir os dois.</p>
+      </div>
+      <div class="teach">
+        <div class="rv">
+          <h3>Disciplinas</h3>
+          <div class="subjects">
+            <span>Cálculo Diferencial e Integral</span><span>Matemática para Engenharia</span><span>Estatística aplicada</span>
+            <span>SQL para análise</span><span>Python para dados</span><span>Power BI</span><span>Métricas de produto</span><span>Testes A/B</span>
+          </div>
+          <details class="pubs">
+            <summary>Publicações selecionadas</summary>
+            <ul>
+              <li>Saturation boiling of HFE-7100 on copper surfaces: bubble departure diameter and bubble frequency</li>
+              <li>Vapor bubble nucleation dynamics in a single artificial cavity</li>
+              <li>A state-of-the-art review on pool boiling on nanostructure surfaces</li>
+              <li>Novas técnicas de modificações superficiais para aumento da transferência de calor por ebulição</li>
+              <li>Validação de aparato experimental para transferência de calor em ebulição sobre superfícies nanoestruturadas</li>
+            </ul>
+          </details>
+        </div>
+        <div class="rv d1">
+          <h3>Experiência docente</h3>
+          <ul class="xp">
+            <li><b>Unesp, Ilha Solteira</b><span>Cálculo Diferencial e Integral I e II para Engenharia Civil e Licenciatura em Física</span></li>
+            <li><b>Curso pré-vestibular</b><span>Matemática e Química, com elaboração de provas e simulados</span></li>
+            <li><b>Treinamentos corporativos</b><span>Materiais e treinamentos internos para equipe de cerca de 85 pessoas</span></li>
+          </ul>
+          <div style="margin-top:26px"><a class="btn btn-ghost" href="curriculo/Isabela-Ignacio-Curriculo-Academico.pdf" download>Baixar currículo acadêmico</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ: tira objeções -->
+  <section aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Perguntas frequentes</span>
+        <h2 id="h-faq">Antes de você perguntar.</h2>
+      </div>
+      <div class="faq rv">
+        <details><summary>Preciso ter os dados organizados?</summary><p>Não. Uma exportação do sistema de pagamento, do CRM ou uma planilha já servem para começar. Organizar os dados faz parte do trabalho.</p></details>
+        <details><summary>Atende negócio pequeno?</summary><p>Sim. O caso MoneyMio é de um app de assinatura de porte pequeno. A pergunta certa importa mais do que o tamanho da base.</p></details>
+        <details><summary>Quais ferramentas você usa?</summary><p>SQL, Python, Databricks, BigQuery, Power BI e Looker Studio. O painel fica na ferramenta que a sua equipe já usa.</p></details>
+        <details><summary>Como é definido o valor?</summary><p>Por projeto. Escopo, prazo e valor ficam fechados na proposta, antes de começar.</p></details>
+        <details><summary>Meus dados ficam seguros?</summary><p>Acesso só ao necessário, sem compartilhar com terceiros. Trabalho há anos com dados sensíveis de clientes e de colaboradores.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA FINAL -->
+  <section class="final" id="contato" aria-labelledby="h-cta">
+    <div class="wrap">
+      <span class="tag rv" style="color:#7FC4CC">Contato</span>
+      <h2 id="h-cta" class="rv" style="margin-top:16px">Qual pergunta os seus dados <span class="serif">ainda não respondem?</span></h2>
+      <p class="rv">Me conte o contexto. Eu respondo dizendo se e como posso ajudar.</p>
+      <div class="ctas rv">
+        <a class="btn btn-accent" href="mailto:isaignacio1@gmail.com?subject=Contato%20pelo%20site">Mandar e-mail
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-light" href="https://www.linkedin.com/in/isabelaignacio" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="mail rv">ou escreva para <a href="mailto:isaignacio1@gmail.com">isaignacio1@gmail.com</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Isabela Ignácio</span>
+    <span class="mono">isabelaignacio.com.br</span>
+  </div>
+</footer>
+
+<div class="dock" id="dock" aria-hidden="true">
+  <span>Isabela Ignácio<small>Análise de retenção e churn</small></span>
+  <a class="btn btn-accent btn-sm" href="#contato" tabindex="-1">Falar comigo</a>
+</div>
+<div class="tip" id="tip" role="status"></div>
+
+<script>
+(function () {
+  // Dados reais do painel da MoneyMio (Stripe), exportados em 12/10/2026. Só percentuais.
+  var COORTES = [
+    { mes: '2025-11', r: [95.1, 92.7, 68.3, 51.2, 51.2, 51.2, 51.2, 51.2, 51.2, 48.8, 42.1] },
+    { mes: '2025-12', r: [90.9, 65.5, 54.5, 54.5, 50.9, 47.3, 47.3, 47.3, 47.3, 37.5] },
+    { mes: '2026-01', r: [93.2, 69.5, 59.3, 55.9, 50.8, 49.2, 47.5, 45.8, 26.1] },
+    { mes: '2026-02', r: [83.3, 66.7, 60, 56.7, 46.7, 46.7, 46.7, 59.1] },
+    { mes: '2026-03', r: [84.2, 52.6, 47.4, 36.8, 36.8, 36.8, 42.9] },
+    { mes: '2026-04', r: [74.1, 74.1, 63, 51.9, 44.4, 28.6] },
+    { mes: '2026-05', r: [93.8, 62.5, 62.5, 56.3, 55.6] },
+    { mes: '2026-06', r: [100, 87.5, 79.2, 87.5] },
+    { mes: '2026-07', r: [92.6, 66.7, 50] },
+    { mes: '2026-08', r: [96.8, 83.3] },
+    { mes: '2026-09', r: [83.3] }
+  ];
+  var CHURN = [
+    ['2025-11', 11.2], ['2025-12', 7.9], ['2026-01', 11.8], ['2026-02', 13.7], ['2026-03', 10.7],
+    ['2026-04', 4.8], ['2026-05', 5.6], ['2026-06', 7], ['2026-07', 4], ['2026-08', 7], ['2026-09', 4.9]
+  ];
+  var MESES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  function rotulo(m) { var p = m.split('-'); return MESES[+p[1] - 1] + '/' + p[0].slice(2); }
+  function fmt(v) { return String(v).replace('.', ','); }
+
+  // escala sequencial de um tom só (claro = pouco, escuro = muito)
+  var RAMPA = ['#EDF5F5', '#D3E8E9', '#B0D5D8', '#86BEC2', '#5AA3A9', '#2F848C', '#165F68'];
+  function cor(v) {
+    var limites = [30, 40, 50, 60, 70, 85];
+    var i = 0; while (i < limites.length && v >= limites[i]) i++;
+    return RAMPA[i];
+  }
+  function tinta(v) { return v >= 70 ? '#FFFFFF' : '#15202E'; }
+
+  var tip = document.getElementById('tip');
+  function mostra(e, html) {
+    tip.innerHTML = html; tip.classList.add('on');
+    var r = e.currentTarget.getBoundingClientRect();
+    tip.style.left = (r.left + r.width / 2) + 'px'; tip.style.top = r.top + 'px';
+  }
+  function esconde() { tip.classList.remove('on'); }
+
+  function heatmap(el, linhas, colunas, comNumero) {
+    el.style.gridTemplateColumns = 'auto repeat(' + colunas + ', minmax(0, 1fr))';
+    var html = '<div></div>';
+    for (var c = 1; c <= colunas; c++) html += '<div class="h">M' + c + '</div>';
+    linhas.forEach(function (lin, li) {
+      html += '<div class="rl">' + rotulo(lin.mes) + '</div>';
+      for (var k = 0; k < colunas; k++) {
+        var v = lin.r[k];
+        if (v === undefined) { html += '<div class="c e"></div>'; continue; }
+        var atraso = ((li + k) * 0.035).toFixed(3);
+        html += '<div class="c" tabindex="0" data-t="Turma de ' + rotulo(lin.mes) + ' · mês ' + (k + 1) + '" data-v="' + fmt(v) +
+          '" style="background:' + cor(v) + ';color:' + tinta(v) + ';transition-delay:' + atraso + 's">' +
+          (comNumero ? Math.round(v) : '') + '</div>';
+      }
+    });
+    el.innerHTML = html;
+    el.querySelectorAll('.c:not(.e)').forEach(function (c) {
+      var f = function (e) { mostra(e, c.dataset.t + '<br><b>' + c.dataset.v + '%</b> ainda pagavam'); };
+      c.addEventListener('mouseenter', f); c.addEventListener('focus', f);
+      c.addEventListener('mouseleave', esconde); c.addEventListener('blur', esconde);
+    });
+  }
+
+  heatmap(document.getElementById('heatMini'), COORTES.slice(0, 8), 6, true);
+  heatmap(document.getElementById('heatFull'), COORTES, 11, true);
+  document.getElementById('scaleBar').innerHTML = RAMPA.map(function (c) { return '<span style="background:' + c + '"></span>'; }).join('');
+
+  // tabela acessível da retenção
+  var t = '<table><tr><th>Turma</th>' + Array.from({ length: 11 }, function (_, i) { return '<th>M' + (i + 1) + '</th>'; }).join('') + '</tr>';
+  COORTES.forEach(function (l) { t += '<tr><td>' + rotulo(l.mes) + '</td>' + Array.from({ length: 11 }, function (_, i) { return '<td>' + (l.r[i] !== undefined ? fmt(l.r[i]) : '') + '</td>'; }).join('') + '</tr>'; });
+  document.getElementById('heatTable').innerHTML = t + '</table>';
+
+  // barras do churn mensal (SVG)
+  (function () {
+    var W = 640, H = 260, ml = 8, mr = 8, mt = 30, mb = 30;
+    var max = 15, n = CHURN.length, passo = (W - ml - mr) / n, larg = passo - 8;
+    var y = function (v) { return mt + (H - mt - mb) * (1 - v / max); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Churn mensal de novembro de 2025 a setembro de 2026">';
+    s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(0) + '" y2="' + y(0) + '" stroke="#E3DFD4"/>';
+    s += '<line class="ref" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(5) + '" y2="' + y(5) + '"/>';
+    s += '<text x="' + (W - mr) + '" y="' + (y(5) + 15) + '" text-anchor="end" style="fill:#C2421D">referência 5%</text>';
+    CHURN.forEach(function (d, i) {
+      var x = ml + i * passo + 4, tardio = i >= 5;
+      var yy = y(d[1]), h = y(0) - yy;
+      s += '<g class="grow" style="transition-delay:' + (i * 0.05) + 's">';
+      s += '<rect class="hit" x="' + (x - 3) + '" y="' + mt + '" width="' + (larg + 6) + '" height="' + (H - mt - mb) + '" fill="transparent" data-i="' + i + '"/>';
+      s += '<path class="b' + (tardio ? ' late' : '') + '" d="M' + x + ',' + y(0) + 'V' + (yy + 4) + 'q0,-4 4,-4h' + (larg - 8) + 'q4,0 4,4V' + y(0) + 'z"/>';
+      s += '</g>';
+      s += '<text x="' + (x + larg / 2) + '" y="' + (H - 10) + '" text-anchor="middle">' + rotulo(d[0]).split('/')[0] + '</text>';
+      if (i === 3 || i === 8) s += '<text class="lbl" x="' + (x + larg / 2) + '" y="' + (yy - 7) + '" text-anchor="middle">' + fmt(d[1]) + '%</text>';
+    });
+    function media(a, b, v, txt) {
+      var x1 = ml + a * passo + 2, x2 = ml + (b + 1) * passo - 2;
+      return '<line class="avg" x1="' + x1 + '" x2="' + x2 + '" y1="' + y(v) + '" y2="' + y(v) + '"/>' +
+        '<text class="lbl" x="' + x1 + '" y="' + (y(v) - 7) + '">média ' + txt + '</text>';
+    }
+    s += media(0, 4, 11.06, '11,1%');
+    s += media(5, 10, 5.55, '5,5%');
+    s += '</svg>';
+    var box = document.getElementById('barsSvg');
+    box.innerHTML = s;
+    box.querySelectorAll('.hit').forEach(function (r) {
+      var d = CHURN[+r.dataset.i];
+      r.addEventListener('mouseenter', function (e) { mostra(e, rotulo(d[0]) + '<br><b>' + fmt(d[1]) + '%</b> de churn'); });
+      r.addEventListener('mouseleave', esconde);
+    });
+    document.getElementById('barsTable').innerHTML = '<table><tr><th>Mês</th><th>Churn</th></tr>' +
+      CHURN.map(function (d) { return '<tr><td>' + rotulo(d[0]) + '</td><td>' + fmt(d[1]) + '%</td></tr>'; }).join('') + '</table>';
+  })();
+
+  // topo, barra fixa e revelação
+  var barra = document.getElementById('bar'), dock = document.getElementById('dock'), contato = document.getElementById('contato');
+  function rolou() {
+    barra.classList.toggle('scrolled', scrollY > 8);
+    var fim = contato.getBoundingClientRect().top < innerHeight;
+    dock.classList.toggle('on', scrollY > innerHeight * 0.8 && !fim);
+  }
+  addEventListener('scroll', rolou, { passive: true }); rolou();
+  addEventListener('scroll', esconde, { passive: true });
+
+  var alvos = document.querySelectorAll('.rv, .panel, .heat');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    alvos.forEach(function (el) { io.observe(el); });
+  } else {
+    alvos.forEach(function (el) { el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
