@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Isabela Ignácio | Análise de dados, retenção e churn</title>
-<meta name="description" content="Especialista em dados (Stone, Afya). Descubro por que seus clientes vão embora: cohort, churn, painéis e testes A/B. Também professora de Cálculo e dados.">
-<meta property="og:title" content="Isabela Ignácio | Seus clientes estão indo embora. Eu descubro por quê.">
-<meta property="og:description" content="Análise de retenção, churn e painéis de indicadores. Caso real com dados da MoneyMio.">
+<title>Isabela Ignácio | Dashboards, analytics e automação com dados</title>
+<meta name="description" content="Especialista em dados. Desenvolvo dashboards, análises e automações que reduzem ineficiências, melhoram resultados e apoiam decisões. Especialidade em retenção e churn.">
+<meta property="og:title" content="Isabela Ignácio | Dados que ajudam empresas a decidir melhor">
+<meta property="og:description" content="Business Intelligence, dashboards, analytics, automação e estratégia de métricas. Da definição dos indicadores à implementação.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://isabelaignacio.com.br/">
 <meta name="theme-color" content="#FAF8F3">
@@ -196,6 +196,7 @@
   .case-intro .facts b { display: block; font-size: 22px; letter-spacing: -0.03em; font-weight: 600; line-height: 1.1; }
   .case-intro .facts span { font-size: 13px; color: var(--muted); }
   .q { display: grid; gap: 28px; padding: 40px 0; border-top: 1px solid var(--line); }
+  .q > *, .split > *, .case > * { min-width: 0; }
   .q-label { font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--brand); }
   .q h3 { font-size: clamp(24px, 4.6vw, 34px); line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; margin-top: 8px; }
   .q .answer { margin-top: 16px; color: var(--ink-2); font-size: 17.5px; }
@@ -393,6 +394,101 @@
     .dock { display: none; }
     .final { padding: 140px 0; }
   }
+
+  /* ---------- reformulação: serviços, resultados e cases ---------- */
+  .hero h1 { font-size: clamp(36px, 8.4vw, 64px); line-height: 1.02; }
+  .pains-4 .pain p { font-size: clamp(19px, 3.2vw, 24px); }
+
+  .svc { display: grid; gap: 14px; }
+  .svc .offer h3 { font-size: 24px; }
+  .svc .offer .pill.soft { background: var(--brand-soft); color: var(--brand-deep); }
+  .svc .note-ia { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--alt); font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+  .options { display: grid; gap: 10px; margin-top: 22px; }
+  .options div { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; background: var(--bg); }
+  .options b { display: block; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .options span { font-size: 14.5px; color: var(--muted); line-height: 1.45; display: block; margin-top: 3px; }
+  .wide-grid { display: grid; gap: 4px 36px; }
+
+  .results-sec { background: var(--dark); color: var(--on-dark); }
+  .results-sec .tag { color: #7FC4CC; }
+  .results-sec .head p { color: var(--on-dark-muted); }
+  .results-sec .head h2 .serif { color: #7FC4CC; }
+  .results { display: grid; gap: 1px; background: #2A3644; border: 1px solid #2A3644; border-radius: 20px; overflow: hidden; }
+  .res { background: var(--dark-2); padding: 24px 22px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .res .kind { align-self: flex-start; font-family: 'Geist Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px; border: 1px solid #3B4A5B; color: var(--on-dark-muted); }
+  .res .kind.obs { border-color: #2F6E73; color: #7FC4CC; }
+  .res .kind.est { border-color: #6B5A2E; color: #E6C77A; }
+  .res .kind.pot { border-color: #6B3B2E; color: #F09A7E; }
+  .res .big { font-size: clamp(40px, 9vw, 54px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; margin-top: 10px; }
+  .res .what { font-size: 16px; font-weight: 500; line-height: 1.35; }
+  .res .ctx { font-size: 13.5px; color: var(--on-dark-muted); line-height: 1.45; margin-top: 4px; }
+
+  .cases { display: grid; gap: 18px; }
+  .case { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 26px 22px; display: grid; gap: 26px; }
+  .case .sector { font-family: 'Geist Mono', monospace; font-size: 12.5px; color: var(--brand); text-transform: uppercase; letter-spacing: .06em; }
+  .case h3 { font-size: clamp(22px, 4vw, 30px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; margin-top: 10px; }
+  .case .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .case .chips span { font-size: 13.5px; padding: 7px 12px; border-radius: 999px; background: var(--brand-soft); color: var(--brand-deep); font-weight: 500; }
+  .case .chips span.pre { background: var(--alt); color: var(--ink-2); }
+  .case dl { display: grid; gap: 0; }
+  .case dl div { display: grid; gap: 2px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .case dt { font-family: 'Geist Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .case dd { font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+  .case dd strong { color: var(--ink); font-weight: 600; }
+  .case .fine { font-size: 13px; color: var(--muted); margin-top: 14px; line-height: 1.45; }
+  .vis { margin-top: 22px; border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: var(--bg); }
+  .vis h4 { font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 12px; }
+  .vis h4 span { font-weight: 400; color: var(--muted); }
+  .cmp { display: grid; gap: 10px; }
+  .cmp + .cmp { margin-top: 16px; }
+  .cmp .row { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .cmp .bar { height: 26px; border-radius: 7px; background: var(--line-2); display: flex; align-items: center; justify-content: flex-end; padding: 0 9px; font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--ink); font-weight: 500; }
+  .cmp .bar.now { background: var(--brand); color: #fff; }
+  .flow { display: grid; gap: 8px; }
+  .flow div { border-radius: 12px; padding: 12px 14px; font-size: 14.5px; line-height: 1.4; }
+  .flow small { display: block; font-family: 'Geist Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+  .flow .was { background: #F6E3DC; color: #7A2E17; }
+  .flow .is { background: var(--brand-soft); color: var(--brand-deep); }
+  .flow i { font-style: normal; text-align: center; color: var(--muted); font-size: 18px; line-height: 1; }
+  .calc { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 6px; text-align: center; }
+  .calc b { display: block; font-size: clamp(20px, 5vw, 26px); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); }
+  .calc span { font-size: 12px; color: var(--muted); }
+  .calc i { font-style: normal; color: var(--muted); }
+  .calc div:last-child b { color: var(--brand); }
+  .lift { display: grid; gap: 10px; }
+  .lift div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 10px; border-bottom: 1px dashed var(--line-2); }
+  .lift div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .lift b { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; color: var(--brand); white-space: nowrap; }
+  .lift span { font-size: 14px; color: var(--ink-2); line-height: 1.35; }
+
+  .others { display: grid; gap: 14px; }
+  .other { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .other .sector { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--brand); text-transform: uppercase; letter-spacing: .06em; }
+  .other h3 { font-size: 19px; line-height: 1.25; letter-spacing: -0.02em; font-weight: 600; margin-top: 8px; }
+  .other p { font-size: 15.5px; color: var(--ink-2); margin-top: 10px; line-height: 1.5; }
+
+  .minis { display: grid; gap: 14px; margin-bottom: 26px; }
+  .mini { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .mini h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; text-transform: none; color: var(--ink); margin: 0; }
+  .mini p { font-size: 15px; color: var(--muted); margin-top: 6px; }
+  .mini ul { list-style: none; margin-top: 12px; }
+  .mini li { font-size: 15px; padding: 7px 0; border-top: 1px solid var(--line); }
+  .acad { display: grid; gap: 10px; padding: 22px 24px; border-radius: var(--r); background: var(--brand-soft); margin-bottom: 56px; }
+  .acad b { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; color: var(--brand-deep); }
+  .acad p { font-size: 15.5px; color: var(--ink-2); }
+
+  @media (min-width: 820px) {
+    .svc { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .svc .offer.wide { grid-column: 1 / -1; }
+    .wide-grid { grid-template-columns: 1.15fr .85fr; align-items: start; }
+    .options { margin-top: 10px; }
+    .results { grid-template-columns: repeat(3, 1fr); }
+    .res { padding: 30px 28px 28px; }
+    .case { grid-template-columns: .95fr 1.05fr; gap: 48px; padding: 40px; }
+    .others { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .minis { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .acad { grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: center; }
+  }
 </style>
 </head>
 <body>
@@ -402,77 +498,308 @@
   <div class="wrap">
     <a class="logo" href="#"><i>II</i>Isabela Ignácio</a>
     <nav class="menu" aria-label="Seções">
-      <a href="saas/">Para SaaS</a>
-      <a href="#caso">Caso real</a>
-      <a href="#formatos">Formatos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#cases">Cases</a>
       <a href="#sobre">Sobre</a>
-      <a href="#docencia">Docência</a>
+      <a href="#ensino">Ensino</a>
+      <a href="saas/">Para SaaS</a>
     </nav>
     <a class="btn btn-accent btn-sm" href="#contato">Falar comigo</a>
   </div>
 </header>
 
 <main>
-  <!-- 1. HERO: dor + promessa + prova -->
+  <!-- 1. HERO: posicionamento + prova -->
   <section class="hero" aria-labelledby="h1">
     <div class="wrap">
       <div>
-        <div class="kicker rv"><b></b>Especialista em dados · retenção e churn</div>
-        <h1 id="h1" class="rv d1">Seus clientes estão indo embora. <span class="serif">Eu descubro por quê.</span></h1>
-        <p class="lead rv d2">Transformo os dados de pagamento, uso e CRM do seu negócio em respostas claras: quem sai, quando sai e o que fazer antes que saia.</p>
+        <div class="kicker rv"><b></b>Consultora em dados · BI, analytics e automação</div>
+        <h1 id="h1" class="rv d1">Dados que ajudam empresas a <span class="serif">decidir melhor</span> e operar com mais eficiência.</h1>
+        <p class="lead rv d2">Desenvolvo dashboards, análises e automações que transformam dados em soluções práticas: da definição dos indicadores à implementação. Especialidade em retenção e churn.</p>
         <div class="ctas rv d3">
-          <a class="btn btn-accent" href="#contato">Quero entender meus números
+          <a class="btn btn-accent" href="#contato">Conversar sobre um projeto
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a class="btn btn-ghost" href="#caso">Ver um caso real</a>
+          <a class="btn btn-ghost" href="#resultados">Ver resultados</a>
         </div>
         <div class="proof rv d3">
-          <span>Hoje em <b>Product Analytics na Afya</b></span>
-          <span>Antes, <b>Growth na Stone</b></span>
-          <span><b>Mestre</b> pela Unesp</span>
+          <span><b>Engenheira</b> e mestre pela Unesp</span>
+          <span>Dados em <b>grandes empresas</b> desde 2021</span>
+          <span><b>Professora</b> de Cálculo</span>
         </div>
       </div>
 
-      <div class="hero-card rv d2" aria-label="Amostra de análise de retenção">
+      <div class="hero-card rv d2" aria-label="Amostra de painel de retenção">
         <div class="hc-top">
           <div>
-            <h2>Retenção por turma de clientes</h2>
-            <p>% que ainda paga, mês a mês</p>
+            <h2>Amostra de painel: retenção por turma</h2>
+            <p>% de clientes que ainda pagam, mês a mês</p>
           </div>
           <span class="live mono">dados reais</span>
         </div>
         <div class="heat" id="heatMini" role="img" aria-label="Mapa de retenção por turma, de novembro de 2025 a junho de 2026"></div>
         <div class="hc-foot">
           <div class="big">60<small>%</small></div>
-          <p>de cada turma ainda paga no 3º mês. Cliente: MoneyMio.</p>
+          <p>de cada turma ainda paga no 3º mês. App de assinatura, caso aberto nesta página.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. SINTOMAS: o leitor se reconhece -->
+  <!-- 2. PROBLEMAS: o leitor se reconhece -->
   <section class="alt" aria-labelledby="h-dor">
     <div class="wrap">
       <div class="head rv">
         <span class="tag">Soa familiar?</span>
-        <h2 id="h-dor">A receita cai e ninguém sabe dizer <span class="serif">por quê.</span></h2>
+        <h2 id="h-dor">Os dados existem. <span class="serif">A decisão continua no escuro.</span></h2>
       </div>
-      <div class="pains">
-        <div class="pain rv"><p>Você vê a receita cair, <em>mas não sabe se falta cliente novo ou se sobra cliente saindo.</em></p></div>
-        <div class="pain rv"><p>O painel tem dezenas de números <em>e nenhum responde à pergunta que importa.</em></p></div>
-        <div class="pain rv"><p>A campanha de retenção vai para quem nunca quis cancelar: <em>o cartão é que foi recusado.</em></p></div>
+      <div class="pains pains-4">
+        <div class="pain rv"><p>Os números estão espalhados em planilhas e sistemas. <em>Cada área chega à reunião com um diferente.</em></p></div>
+        <div class="pain rv"><p>O problema só aparece quando já virou custo: <em>multa, atraso ou cliente perdido.</em></p></div>
+        <div class="pain rv"><p>A equipe gasta horas toda semana em tarefas manuais <em>que uma regra bem definida resolveria.</em></p></div>
+        <div class="pain rv"><p>A receita cai <em>e ninguém sabe dizer se falta cliente novo ou se sobra cliente saindo.</em></p></div>
       </div>
-      <p class="bridge rv">Cada um desses problemas tem uma pergunta por trás. <span class="serif">Meu trabalho começa por ela.</span></p>
+      <p class="bridge rv">Não entrego só relatórios. <span class="serif">Desenvolvo soluções orientadas por dados</span> para reduzir ineficiências, melhorar resultados e apoiar decisões.</p>
     </div>
   </section>
 
-  <!-- 3. CASO REAL: prova com dados -->
-  <section id="caso" aria-labelledby="h-caso">
+  <!-- 3. SERVIÇOS -->
+  <section id="servicos" aria-labelledby="h-svc">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Serviços</span>
+        <h2 id="h-svc">Quatro formas de transformar dados <span class="serif">em resultado.</span></h2>
+        <p>Você pode contratar uma entrega específica, como um dashboard, ou um projeto completo, do diagnóstico à implementação.</p>
+      </div>
+      <div class="svc">
+        <article class="offer feat wide rv">
+          <div class="top"><span class="n">01</span><span class="pill">Serviço principal</span></div>
+          <div class="wide-grid">
+            <div>
+              <h3>Business Intelligence e dashboards</h3>
+              <p class="for">Para gestores que decidem com números espalhados, desatualizados ou em que ninguém confia. O objetivo não é ter gráficos: é ter uma ferramenta de gestão que mostre o que está acontecendo e onde agir.</p>
+              <h4>O que eu faço</h4>
+              <ul>
+                <li>Levanto as perguntas que a gestão precisa responder</li>
+                <li>Defino KPIs, regras de negócio e metas de acompanhamento</li>
+                <li>Mapeio, trato e modelo os dados, com a engenharia quando é preciso</li>
+                <li>Desenvolvo dashboards executivos, comerciais, financeiros, operacionais, de RH e de Produto</li>
+                <li>Incluo filtros, rankings, comparativos e alertas para desvios</li>
+                <li>Automatizo a atualização quando as fontes e as ferramentas permitem</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Duas formas de contratar</h4>
+              <div class="options">
+                <div><b>Projeto de dashboard</b><span>Um painel específico, com escopo e entregas definidos antes de começar.</span></div>
+                <div><b>Projeto completo de BI</b><span>Diagnóstico, mapeamento dos dados, indicadores, modelagem, dashboard e rotina de acompanhamento.</span></div>
+              </div>
+              <a class="go" href="mailto:isaignacio1@gmail.com?subject=Projeto%20de%20dashboard">Pedir proposta de dashboard
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="offer rv">
+          <div class="top"><span class="n">02</span><span class="pill soft">Especialidade: retenção e churn</span></div>
+          <h3>Analytics e inteligência de negócios</h3>
+          <p class="for">Para investigar um problema, entender o desempenho e decidir o que priorizar.</p>
+          <h4>Você recebe</h4>
+          <ul>
+            <li>Diagnóstico de desempenho e de indicadores comerciais e financeiros</li>
+            <li>Segmentação e comportamento de clientes</li>
+            <li>Retenção, churn e reativação</li>
+            <li>Avaliação de campanhas e ofertas com grupo de controle</li>
+            <li>Gargalos, oportunidades e recomendações com evidência</li>
+          </ul>
+          <a class="go" href="saas/">Ver o Raio-X de churn para SaaS
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="offer rv d1">
+          <div class="top"><span class="n">03</span></div>
+          <h3>Automação e eficiência operacional</h3>
+          <p class="for">Para reduzir trabalho manual, retrabalho e risco operacional.</p>
+          <h4>Você recebe</h4>
+          <ul>
+            <li>Automação de relatórios e de rotinas analíticas</li>
+            <li>Alertas preventivos e mecanismos de controle</li>
+            <li>Simplificação do processo antes de automatizar</li>
+            <li>IA aplicada a tarefas repetitivas, como classificar textos</li>
+            <li>Ferramentas de apoio à operação comercial</li>
+          </ul>
+          <p class="note-ia">IA entra quando resolve um problema específico. Antes, valido as regras com amostras reais e defino onde a revisão humana continua.</p>
+          <a class="go" href="mailto:isaignacio1@gmail.com?subject=Automa%C3%A7%C3%A3o%20de%20processo">Pedir proposta
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="offer rv">
+          <div class="top"><span class="n">04</span></div>
+          <h3>Estratégia de dados e métricas</h3>
+          <p class="for">Para definir o que acompanhar, como medir sucesso e o que fazer quando o número muda.</p>
+          <h4>Você recebe</h4>
+          <ul>
+            <li>Definição e padronização de KPIs</li>
+            <li>Health Metrics de Produto e da jornada do cliente</li>
+            <li>Métricas de experimentos: critério de sucesso e indicadores de proteção</li>
+            <li>Modelos de acompanhamento gerencial</li>
+            <li>Cada métrica ligada à decisão que ela orienta</li>
+          </ul>
+          <a class="go" href="mailto:isaignacio1@gmail.com?subject=Estrat%C3%A9gia%20de%20m%C3%A9tricas">Pedir proposta
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. RESULTADOS EM DESTAQUE -->
+  <section class="results-sec" id="resultados" aria-labelledby="h-res">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Resultados</span>
+        <h2 id="h-res">Números de projetos que conduzi, <span class="serif">com o contexto de cada um.</span></h2>
+        <p>Cada número diz o que é: resultado observado, estimativa ou potencial. Volume transacionado não é receita. Prejuízo histórico não é economia.</p>
+      </div>
+      <div class="results rv">
+        <div class="res"><span class="kind obs">Resultado observado</span><div class="big">53,8 mil</div><div class="what">clientes reativados</div><div class="ctx">Serviços financeiros · estratégias de reativação</div></div>
+        <div class="res"><span class="kind est">Estimativa</span><div class="big">R$ 16 mi</div><div class="what">em TPV mensal recuperado</div><div class="ctx">Mesmo projeto. TPV é o volume que os clientes transacionam, não é receita nem lucro.</div></div>
+        <div class="res"><span class="kind obs">Resultado observado</span><div class="big">−60%</div><div class="what">pedidos de estudo comercial que não avançavam</div><div class="ctx">Comércio exterior · calculadora de custos de importação</div></div>
+        <div class="res"><span class="kind obs">Resultado observado</span><div class="big">4 → 2 dias</div><div class="what">no prazo do estudo comercial (−50%)</div><div class="ctx">Mesmo projeto da calculadora</div></div>
+        <div class="res"><span class="kind pot">Potencial</span><div class="big">3.120 h</div><div class="what">por ano de capacidade operacional</div><div class="ctx">Automação de NPS com IA. Conta: 60 horas por semana × 52 semanas, se a rotina manual deixar de existir.</div></div>
+        <div class="res"><span class="kind obs">Resultado observado</span><div class="big">Zero</div><div class="what">gastos com os atrasos monitorados após a implementação</div><div class="ctx">Comércio exterior · controle preventivo de custos</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CASES EM DESTAQUE -->
+  <section id="cases" aria-labelledby="h-cases">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Cases em destaque</span>
+        <h2 id="h-cases">Do problema de negócio <span class="serif">à solução funcionando.</span></h2>
+        <p>Projetos que conduzi como especialista de dados nas empresas onde trabalhei. Os nomes ficam de fora por confidencialidade.</p>
+      </div>
+      <div class="cases">
+
+        <article class="case rv">
+          <div>
+            <div class="sector">Comércio exterior · controle de custos</div>
+            <h3>Prevenção de custos operacionais: de um controle reativo a uma gestão orientada por dados.</h3>
+            <div class="chips"><span>Zero gastos com os atrasos monitorados</span><span>Alertas preventivos</span></div>
+            <div class="vis">
+              <h4>O que mudou na gestão</h4>
+              <div class="flow">
+                <div class="was"><small>Antes</small>O atraso aparecia quando o custo já tinha acontecido.</div>
+                <i aria-hidden="true">↓</i>
+                <div class="is"><small>Depois</small>O alerta aparece antes do custo. A gestão age a tempo.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <dl>
+              <div><dt>O desafio</dt><dd>Atrasos em processos de importação geravam custos. O histórico somava <strong>prejuízos próximos de R$ 1 milhão</strong>. Sem acompanhamento estruturado, os casos críticos só apareciam depois.</dd></div>
+              <div><dt>A abordagem</dt><dd>Mapeei as informações necessárias, alinhei com a engenharia a disponibilização dos dados e estruturei os indicadores de acompanhamento.</dd></div>
+              <div><dt>A solução</dt><dd>Dashboard gerencial com visualizações e alertas preventivos, usado em rotinas de acompanhamento com os gestores.</dd></div>
+              <div><dt>O resultado</dt><dd>Depois da implementação do sistema e da rotina, <strong>não voltaram a ocorrer gastos com os atrasos monitorados.</strong></dd></div>
+              <div><dt>O impacto</dt><dd>A gestão passou a agir antes do custo, não depois dele.</dd></div>
+            </dl>
+            <p class="fine">O valor de R$ 1 milhão se refere a prejuízos históricos, não a uma economia medida depois.</p>
+          </div>
+        </article>
+
+        <article class="case rv">
+          <div>
+            <div class="sector">Comércio exterior · ferramenta de autosserviço</div>
+            <h3>60% menos solicitações comerciais improdutivas e 50% menos tempo de entrega.</h3>
+            <div class="chips"><span>−60% pedidos que não avançavam</span><span>4 → 2 dias de prazo</span></div>
+            <div class="vis">
+              <h4>Antes e depois</h4>
+              <div class="cmp" role="img" aria-label="Prazo do estudo comercial: 4 dias antes, 2 dias depois">
+                <div class="row"><span>Antes</span><div class="bar" style="width:100%">4 dias</div></div>
+                <div class="row"><span>Depois</span><div class="bar now" style="width:50%">2 dias</div></div>
+              </div>
+              <div class="cmp" role="img" aria-label="Pedidos que não avançavam: índice 100 antes, 40 depois">
+                <div class="row"><span>Antes</span><div class="bar" style="width:100%">100</div></div>
+                <div class="row"><span>Depois</span><div class="bar now" style="width:40%">40</div></div>
+              </div>
+              <p class="fine" style="margin-top:10px">Prazo em dias. Pedidos em índice: antes = 100.</p>
+            </div>
+          </div>
+          <div>
+            <dl>
+              <div><dt>O desafio</dt><dd>Potenciais clientes pediam estudos comerciais para estimar custos de importação. Muitos pedidos não viravam contratação e ocupavam a equipe.</dd></div>
+              <div><dt>A abordagem</dt><dd>Modelei os custos que pesam na decisão: frete aéreo e marítimo, tributos por código NCM e aspectos fiscais e regulatórios.</dd></div>
+              <div><dt>A solução</dt><dd>Uma calculadora em que o próprio comprador insere os dados e recebe uma estimativa antes de pedir o estudo completo.</dd></div>
+              <div><dt>O resultado</dt><dd><strong>Cerca de 60% menos pedidos de estudo que não avançavam.</strong> O prazo do estudo final caiu de quatro para dois dias.</dd></div>
+              <div><dt>O impacto</dt><dd>A equipe comercial passou a dedicar o tempo a quem tinha intenção real de comprar.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case rv">
+          <div>
+            <div class="sector">Serviços financeiros · retenção e reativação</div>
+            <h3>Estratégias de reativação orientadas por dados: 53,8 mil clientes reativados e R$ 16 milhões em TPV mensal recuperado.</h3>
+            <div class="chips"><span>53,8 mil reativados</span><span>R$ 16 mi de TPV mensal (estimativa)</span></div>
+            <div class="vis">
+              <h4>Comparado ao grupo de controle</h4>
+              <div class="lift">
+                <div><span>TPV médio em uma das ofertas</span><b>até +29,8%</b></div>
+                <div><span>Reativação de quem aceitou uma das ofertas</span><b>até +166%</b></div>
+                <div><span>Taxa de reativação em outra análise <em>(preliminar)</em></span><b>+1,7 p.p.</b></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <dl>
+              <div><dt>O desafio</dt><dd>Uma base grande de clientes inativos e várias ofertas possíveis para trazê-los de volta. Era preciso saber o que funcionava de fato e para quem.</dd></div>
+              <div><dt>A abordagem</dt><dd>Análise de churn, retenção e reativação, segmentação por perfil, sensibilidade a preço, TPV médio e mix transacional, sempre comparando grupos de tratamento e de controle.</dd></div>
+              <div><dt>A solução</dt><dd>Evidências para escolher ofertas e públicos, com a leitura dos testes apresentada para orientar a estratégia comercial.</dd></div>
+              <div><dt>O resultado</dt><dd><strong>53,8 mil clientes reativados</strong> e incremento estimado de <strong>R$ 16 milhões em TPV mensal recuperado.</strong> Os ganhos frente ao controle aparecem ao lado.</dd></div>
+              <div><dt>O impacto</dt><dd>As decisões comerciais passaram a se apoiar em teste, não em opinião.</dd></div>
+            </dl>
+            <p class="fine">TPV é o volume transacionado pelos clientes, não receita nem lucro. Os 166% são o ganho relativo frente à referência de controle usada. O +1,7 p.p. é de uma análise preliminar.</p>
+          </div>
+        </article>
+
+        <article class="case rv">
+          <div>
+            <div class="sector">Atendimento · automação com IA</div>
+            <h3>Automação de NPS com IA: até 3.120 horas anuais de capacidade operacional potencialmente liberada.</h3>
+            <div class="chips"><span>Árvore de classificação refeita</span><span>Classificação com IA</span></div>
+            <div class="vis">
+              <h4>De onde vem o número <span>(potencial)</span></h4>
+              <div class="calc">
+                <div><b>60 h</b><span>por semana</span></div><i>→</i>
+                <div><b>240 h</b><span>por mês</span></div><i>→</i>
+                <div><b>3.120 h</b><span>por ano</span></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <dl>
+              <div><dt>O desafio</dt><dd>Três pessoas gastavam cerca de 60 horas por semana lendo e reclassificando comentários de NPS, porque o texto nem sempre combinava com a nota dada.</dd></div>
+              <div><dt>A abordagem</dt><dd>Investiguei o processo, encontrei ambiguidades nas categorias e reestruturei a árvore de classificação com regras mais simples.</dd></div>
+              <div><dt>A solução</dt><dd>Classificação automatizada com IA sobre a nova árvore, reduzindo a dependência da reclassificação manual.</dd></div>
+              <div><dt>O resultado</dt><dd>Potencial de <strong>até 3.120 horas por ano</strong> de capacidade liberada, se a rotina de 60 horas semanais deixar de existir.</dd></div>
+              <div><dt>O impacto</dt><dd>A equipe deixa de reclassificar comentários e passa a agir sobre o que os clientes dizem.</dd></div>
+            </dl>
+            <p class="fine">Estimativa de potencial: 60 horas × 52 semanas. A economia efetiva depende da medição depois da implementação.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CASO ABERTO: retenção com dados reais -->
+  <section class="alt" id="caso" aria-labelledby="h-caso">
     <div class="wrap">
       <div class="case-intro">
         <div class="head rv" style="margin-bottom:0">
-          <span class="tag">Caso real · MoneyMio</span>
+          <span class="tag">Caso aberto · retenção com dados reais</span>
           <h2 id="h-caso">Um app por assinatura, três contas de pagamento e uma pergunta: <span class="serif">por que os clientes saem?</span></h2>
-          <p>Os pagamentos estavam espalhados em três contas do Stripe, o tráfego pago vinha da Meta e não existia uma visão única de quem ficava. Organizei a análise em três perguntas.</p>
+          <p>Os pagamentos estavam espalhados em três contas, o tráfego pago vinha de anúncios e não existia uma visão única de quem ficava. Organizei a análise em três perguntas.</p>
         </div>
         <div class="facts rv d1">
           <div><b>3</b><span>contas de pagamento</span></div>
@@ -542,79 +869,56 @@
         <b>Meu papel</b>
         <p>Definição das perguntas, das métricas e da leitura de churn e cohort, que viraram um painel único organizado por pergunta: visão geral, receita, churn, aquisição e clientes.</p>
       </div>
-      <p class="note">Números publicados com autorização da MoneyMio. Valores em reais omitidos.</p>
+      <p class="note">Números publicados com autorização do cliente. Valores em reais omitidos.</p>
     </div>
   </section>
 
-  <!-- 4. FORMATOS: a oferta -->
-  <section class="alt" id="formatos" aria-labelledby="h-form">
+  <!-- 7. OUTROS PROJETOS -->
+  <section aria-labelledby="h-outros">
     <div class="wrap">
       <div class="head rv">
-        <span class="tag">Formatos</span>
-        <h2 id="h-form">Três formas de trabalhar comigo, <span class="serif">com entrega clara.</span></h2>
+        <span class="tag">Outros projetos</span>
+        <h2 id="h-outros">Mais experiências em <span class="serif">dashboards e métricas.</span></h2>
       </div>
-      <div class="offers">
-        <article class="offer feat rv">
-          <div class="top"><span class="n">01</span><span class="pill">Por onde começar</span></div>
-          <h3>Diagnóstico de retenção</h3>
-          <p class="for">Para negócios de assinatura ou recorrência que perdem clientes e não sabem por quê.</p>
-          <h4>Você recebe</h4>
-          <ul>
-            <li>Cohort: quanto tempo cada turma de clientes fica</li>
-            <li>Os motivos de saída, separados entre desistência e falha de pagamento</li>
-            <li>Plano de ação em ordem de impacto</li>
-          </ul>
-          <a class="go" href="mailto:isaignacio1@gmail.com?subject=Diagn%C3%B3stico%20de%20reten%C3%A7%C3%A3o">Pedir proposta
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="others">
+        <article class="other rv">
+          <div class="sector">Setor imobiliário</div>
+          <h3>Inteligência comercial: uma visão integrada da carteira, das locações e do desempenho da operação.</h3>
+          <p>Dashboard com carteira de clientes e imóveis alugados, gestão de locações, vendas e aluguéis por corretor, indicadores financeiros e rankings. Os corretores acompanham a própria carteira. Os gestores enxergam a operação inteira.</p>
         </article>
-        <article class="offer rv d1">
-          <div class="top"><span class="n">02</span></div>
-          <h3>Painel de indicadores</h3>
-          <p class="for">Para quem ainda decide no feeling porque os números estão espalhados.</p>
-          <h4>Você recebe</h4>
-          <ul>
-            <li>Painel em Power BI ou Looker Studio organizado por pergunta</li>
-            <li>Ligado às suas fontes: pagamentos, CRM ou planilhas</li>
-            <li>Leitura dos números com você na entrega</li>
-          </ul>
-          <a class="go" href="mailto:isaignacio1@gmail.com?subject=Painel%20de%20indicadores">Pedir proposta
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <article class="other rv d1">
+          <div class="sector">Recursos Humanos</div>
+          <h3>People Analytics: indicadores integrados para orientar decisões de gestão de pessoas.</h3>
+          <p>Diagnóstico de rotatividade com as diferenças entre regiões e recomendações para cada contexto. Dashboard com departamento pessoal, engajamento, recrutamento, remuneração e clima.</p>
         </article>
-        <article class="offer rv d2">
-          <div class="top"><span class="n">03</span></div>
-          <h3>Aulas e treinamentos</h3>
-          <p class="for">Para faculdades, pós-graduações, equipes e alunos.</p>
-          <h4>Temas</h4>
-          <ul>
-            <li>Cálculo Diferencial e Integral para Engenharia</li>
-            <li>SQL, Python e Power BI aplicados a negócio</li>
-            <li>Métricas de produto e testes A/B</li>
-          </ul>
-          <a class="go" href="#docencia">Ver docência
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <article class="other rv d2">
+          <div class="sector">Produto</div>
+          <h3>Health Metrics: uma visão integrada da jornada do cliente para orientar decisões de Produto.</h3>
+          <p>Definição e padronização das métricas da jornada do cliente, consolidadas num dashboard com indicadores orientados à ação.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 5. COMO FUNCIONA -->
-  <section aria-labelledby="h-how">
+  <!-- 8. COMO FUNCIONA -->
+  <section class="alt" aria-labelledby="h-how">
     <div class="wrap how">
       <div class="head rv">
         <span class="tag">Como funciona</span>
         <h2 id="h-how">Sem surpresa no meio do caminho.</h2>
-        <p>Você sabe o que vai receber, quando e por quanto antes de eu abrir o primeiro arquivo.</p>
+        <p>Num dashboard pontual, as três primeiras etapas cabem numa conversa e numa proposta curta. Projetos maiores ganham um diagnóstico próprio.</p>
       </div>
       <ol class="steps">
-        <li class="rv"><h3>Conversa inicial</h3><p>Você conta o contexto do negócio e a pergunta que quer responder.</p></li>
-        <li class="rv"><h3>Proposta fechada</h3><p>Escopo, prazo e valor definidos por escrito antes de começar.</p></li>
-        <li class="rv"><h3>Análise com sigilo</h3><p>Acesso só ao que for necessário. Seus dados não saem do projeto.</p></li>
-        <li class="rv"><h3>Entrega explicada</h3><p>Os achados em linguagem de negócio, com o que fazer primeiro.</p></li>
+        <li class="rv"><h3>Entendimento do problema</h3><p>Você conta o contexto e a decisão que precisa tomar.</p></li>
+        <li class="rv"><h3>Diagnóstico do negócio e dos dados</h3><p>Vejo quais dados existem, onde estão e o quanto dá para confiar neles.</p></li>
+        <li class="rv"><h3>Solução e indicadores de sucesso</h3><p>Proposta fechada por escrito: escopo, prazo, valor e como vamos medir o resultado.</p></li>
+        <li class="rv"><h3>Desenvolvimento e implementação</h3><p>Construo a solução com acesso só ao necessário e valido com quem vai usar.</p></li>
+        <li class="rv"><h3>Validação e acompanhamento</h3><p>Conferimos se o resultado apareceu e ajustamos o que for preciso.</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- 6. SOBRE: autoridade e história -->
+  <!-- 9. SOBRE -->
   <section class="about" id="sobre" aria-labelledby="h-sobre">
     <div class="wrap about-grid">
       <div>
@@ -622,42 +926,63 @@
           <span class="tag">Sobre</span>
           <h2 id="h-sobre">Engenheira de formação. <span class="serif">Especialista em dados por escolha.</span></h2>
         </div>
-        <p class="quote rv">Entendo o lado técnico do dado <span class="serif">e o impacto humano e de negócio</span> por trás dele.</p>
-        <p class="quote-by rv">Foi no mestrado, analisando dados experimentais, que a análise virou profissão. Depois vieram People Analytics na Ambev, Growth na Stone e Product Analytics na Afya.</p>
+        <p class="quote rv">Conecto o lado técnico do dado <span class="serif">às decisões de negócio</span> que ele precisa orientar.</p>
+        <p class="quote-by rv">Foi no mestrado, analisando dados experimentais, que a análise virou profissão. Desde 2021 trabalho com dados em empresas de grande porte: gestão de pessoas, comércio exterior, serviços financeiros e educação. Como professora de Cálculo, aprendi a explicar o complexo de forma simples.</p>
         <div class="creds rv">
-          <div><b>Stone</b><span>modelo de predição de churn e testes A/B</span></div>
-          <div><b>2.300</b><span>colaboradores no People Analytics da Ambev</span></div>
           <div><b>Mestre</b><span>em Ciências Térmicas pela Unesp</span></div>
           <div><b>7</b><span>publicações científicas</span></div>
+          <div><b>2.300</b><span>colaboradores acompanhados em People Analytics</span></div>
+          <div><b>~30</b><span>trabalhos acadêmicos com mentoria</span></div>
         </div>
       </div>
       <div>
         <figure class="about-photo rv">
           <picture><source srcset="img/isabela.webp" type="image/webp"><img src="img/isabela.jpg" alt="Isabela Ignácio" width="900" height="907" loading="lazy"></picture>
-          <figcaption><b>Isabela Ignácio</b><span>Especialista em dados · Afya</span></figcaption>
+          <figcaption><b>Isabela Ignácio</b><span>Especialista em dados</span></figcaption>
         </figure>
       <ol class="tl">
-        <li class="now rv"><span class="when">2026 a hoje</span><h3>Afya · Senior Data Analyst</h3><p>Product Analytics: funis, engajamento, retenção, testes A/B e inferência causal.</p></li>
-        <li class="rv"><span class="when">2024 a 2026</span><h3>Stone · Senior Data Analyst</h3><p>Time fundador do Consumer Banking: churn, reativação, CRM e predição de cancelamento.</p></li>
-        <li class="rv"><span class="when">2022 a 2024</span><h3>Timbro Trading · Analista</h3><p>Painéis em Power BI e SQL Server, Scrum e treinamentos para cerca de 85 pessoas.</p></li>
-        <li class="rv"><span class="when">2021 a 2022</span><h3>Ambev · People Analytics</h3><p>Indicadores de pessoas e plano de redução de turnover.</p></li>
+        <li class="now rv"><span class="when">2026 a hoje</span><h3>Educação · Senior Data Analyst</h3><p>Product Analytics: funis, engajamento, retenção, testes A/B e inferência causal.</p></li>
+        <li class="rv"><span class="when">2024 a 2026</span><h3>Serviços financeiros · Senior Data Analyst</h3><p>Growth: churn, reativação, CRM e predição de cancelamento.</p></li>
+        <li class="rv"><span class="when">2022 a 2024</span><h3>Comércio exterior · Analista Sênior</h3><p>Controle de custos, calculadora de importação, painéis e treinamentos para cerca de 85 pessoas.</p></li>
+        <li class="rv"><span class="when">2021 a 2022</span><h3>Empresa de grande porte · People Analytics</h3><p>Indicadores de pessoas e diagnóstico de rotatividade.</p></li>
         <li class="rv"><span class="when">2019 a 2021</span><h3>Unesp e FAPESP · Mestrado</h3><p>Pesquisa em transferência de calor, com dados experimentais em Python.</p></li>
       </ol>
       </div>
     </div>
   </section>
 
-  <!-- 7. DOCÊNCIA: para coordenadores -->
-  <section class="alt" id="docencia" aria-labelledby="h-doc">
+  <!-- 10. ENSINO, MENTORIA E CAPACITAÇÃO -->
+  <section class="alt" id="ensino" aria-labelledby="h-ensino">
     <div class="wrap">
       <div class="head rv">
-        <span class="tag">Para coordenadores de curso</span>
-        <h2 id="h-doc">Também em <span class="serif">sala de aula.</span></h2>
-        <p>Experiência como professora de Cálculo na graduação, prática diária com dados em grandes empresas e didática para traduzir os dois.</p>
+        <span class="tag">Ensino, mentoria e capacitação</span>
+        <h2 id="h-ensino">Também ensino o que <span class="serif">faço com dados.</span></h2>
+        <p>Experiência como professora de Cálculo na graduação, prática diária com dados e didática para traduzir os dois.</p>
+      </div>
+      <div class="minis">
+        <div class="mini rv">
+          <h3>Treinamentos corporativos</h3>
+          <p>Para equipes que precisam interpretar dados e resultados.</p>
+          <ul><li>Análise de dados aplicada a negócios</li><li>Métricas e indicadores</li><li>Estatística aplicada</li><li>SQL e Python, conforme o público</li></ul>
+        </div>
+        <div class="mini rv d1">
+          <h3>Mentoria técnica</h3>
+          <p>Para profissionais que querem ganhar autonomia com dados.</p>
+          <ul><li>Aulas individuais</li><li>Exercícios práticos</li><li>Raciocínio quantitativo</li><li>Análise de dados do zero ao avançado</li></ul>
+        </div>
+        <div class="mini rv d2">
+          <h3>Aulas e orientação acadêmica</h3>
+          <p>Para estudantes de graduação e pós.</p>
+          <ul><li>Aulas particulares de Cálculo e Matemática</li><li>Mentoria metodológica</li><li>Apoio em análise quantitativa</li><li>Revisão e aprimoramento de textos</li></ul>
+        </div>
+      </div>
+      <div class="acad rv">
+        <b>Mentoria acadêmica: apoio metodológico e aprimoramento de aproximadamente 30 trabalhos.</b>
+        <p>TCCs, dissertações e trabalhos de MBA: organização dos argumentos, orientação metodológica, revisão de texto e interpretação de resultados. A autoria é sempre de quem escreve.</p>
       </div>
       <div class="teach">
         <div class="rv">
-          <h3>Disciplinas</h3>
+          <h3>Para coordenadores de curso · disciplinas</h3>
           <div class="subjects">
             <span>Cálculo Diferencial e Integral</span><span>Matemática para Engenharia</span><span>Estatística aplicada</span>
             <span>SQL para análise</span><span>Python para dados</span><span>Power BI</span><span>Métricas de produto</span><span>Testes A/B</span>
@@ -679,6 +1004,7 @@
             <li><b>Unesp, Ilha Solteira</b><span>Cálculo Diferencial e Integral I e II para Engenharia Civil e Licenciatura em Física</span></li>
             <li><b>Curso pré-vestibular</b><span>Matemática e Química, com elaboração de provas e simulados</span></li>
             <li><b>Treinamentos corporativos</b><span>Materiais e treinamentos internos para equipe de cerca de 85 pessoas</span></li>
+            <li><b>Mentoria acadêmica</b><span>Cerca de 30 trabalhos entre TCC, dissertação e MBA</span></li>
           </ul>
           <div style="margin-top:26px"><a class="btn btn-ghost" href="curriculo/Isabela-Ignacio-Curriculo-Academico.pdf" download>Baixar currículo acadêmico</a></div>
         </div>
@@ -686,7 +1012,7 @@
     </div>
   </section>
 
-  <!-- 8. FAQ: tira objeções -->
+  <!-- 11. FAQ -->
   <section aria-labelledby="h-faq">
     <div class="wrap">
       <div class="head rv">
@@ -694,8 +1020,10 @@
         <h2 id="h-faq">Antes de você perguntar.</h2>
       </div>
       <div class="faq rv">
+        <details><summary>Posso contratar só um dashboard?</summary><p>Sim. Um painel específico é um projeto com escopo e entregas definidos. Se fizer sentido, ele pode crescer depois para um projeto completo de BI.</p></details>
         <details><summary>Preciso ter os dados organizados?</summary><p>Não. Uma exportação do sistema de pagamento, do CRM ou uma planilha já servem para começar. Organizar os dados faz parte do trabalho.</p></details>
-        <details><summary>Atende negócio pequeno?</summary><p>Sim. O caso MoneyMio é de um app de assinatura de porte pequeno. A pergunta certa importa mais do que o tamanho da base.</p></details>
+        <details><summary>A atualização do painel é automática?</summary><p>Depende das fontes, dos acessos e das ferramentas que a empresa já tem. Isso é avaliado no diagnóstico, antes da proposta.</p></details>
+        <details><summary>Atende negócio pequeno?</summary><p>Sim. O caso aberto desta página é de um app de assinatura de porte pequeno. A pergunta certa importa mais do que o tamanho da base.</p></details>
         <details><summary>Quais ferramentas você usa?</summary><p>SQL, Python, Databricks, BigQuery, Power BI e Looker Studio. O painel fica na ferramenta que a sua equipe já usa.</p></details>
         <details><summary>Como é definido o valor?</summary><p>Por projeto. Escopo, prazo e valor ficam fechados na proposta, antes de começar.</p></details>
         <details><summary>Meus dados ficam seguros?</summary><p>Acesso só ao necessário, sem compartilhar com terceiros. Trabalho há anos com dados sensíveis de clientes e de colaboradores.</p></details>
@@ -703,12 +1031,12 @@
     </div>
   </section>
 
-  <!-- 9. CTA FINAL -->
+  <!-- 12. CTA FINAL -->
   <section class="final" id="contato" aria-labelledby="h-cta">
     <div class="wrap">
       <span class="tag rv" style="color:#7FC4CC">Contato</span>
-      <h2 id="h-cta" class="rv" style="margin-top:16px">Qual pergunta os seus dados <span class="serif">ainda não respondem?</span></h2>
-      <p class="rv">Me conte o contexto. Eu respondo dizendo se e como posso ajudar.</p>
+      <h2 id="h-cta" class="rv" style="margin-top:16px">Qual problema os seus dados <span class="serif">podem ajudar a resolver?</span></h2>
+      <p class="rv">Me conte o contexto. Eu respondo dizendo se e como posso ajudar: um dashboard, uma análise, uma automação ou um projeto completo.</p>
       <div class="ctas rv">
         <a class="btn btn-accent" href="mailto:isaignacio1@gmail.com?subject=Contato%20pelo%20site">Mandar e-mail
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -727,14 +1055,13 @@
 </footer>
 
 <div class="dock" id="dock" aria-hidden="true">
-  <span>Isabela Ignácio<small>Análise de retenção e churn</small></span>
+  <span>Isabela Ignácio<small>Dashboards, analytics e automação</small></span>
   <a class="btn btn-accent btn-sm" href="#contato" tabindex="-1">Falar comigo</a>
 </div>
 <div class="tip" id="tip" role="status"></div>
-
 <script>
 (function () {
-  // Dados reais do painel da MoneyMio (Stripe), exportados em 12/10/2026. Só percentuais.
+  // Dados reais do painel de um app de assinatura (cliente autorizou), exportados em 12/10/2026. Só percentuais.
   var COORTES = [
     { mes: '2025-11', r: [95.1, 92.7, 68.3, 51.2, 51.2, 51.2, 51.2, 51.2, 51.2, 48.8, 42.1] },
     { mes: '2025-12', r: [90.9, 65.5, 54.5, 54.5, 50.9, 47.3, 47.3, 47.3, 47.3, 37.5] },
