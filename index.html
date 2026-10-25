@@ -408,6 +408,17 @@
   .options b { display: block; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
   .options span { font-size: 14.5px; color: var(--muted); line-height: 1.45; display: block; margin-top: 3px; }
   .wide-grid { display: grid; gap: 4px 36px; }
+  .offer .for b, .offer .ind b { color: var(--ink); font-weight: 600; }
+  .offer .ind { margin-top: 18px; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .blocos { display: grid; gap: 14px; margin-top: 20px; }
+  .blocos h4 { margin-top: 0; color: var(--brand); }
+  .blocos p { font-size: 15px; color: var(--ink-2); line-height: 1.5; margin-top: 4px; }
+  .spec { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 15.5px; font-weight: 500; color: var(--brand-deep); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .e2e { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; counter-reset: e; }
+  .e2e li { counter-increment: e; font-size: 13.5px; padding: 7px 12px; border-radius: 999px; border: 1px solid #344152; color: var(--on-dark); }
+  .e2e li::before { content: counter(e) ' '; font-family: 'Geist Mono', monospace; color: #7FC4CC; margin-right: 4px; }
+  .e2e-t { margin-top: 30px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #7FC4CC; font-weight: 600; }
+  .more { display: inline-block; margin-top: 14px; font-size: 14.5px; font-weight: 500; color: var(--brand-deep); }
 
   .results-sec { background: var(--dark); color: var(--on-dark); }
   .results-sec .tag { color: #7FC4CC; }
@@ -482,6 +493,7 @@
     .svc .offer.wide { grid-column: 1 / -1; }
     .wide-grid { grid-template-columns: 1.15fr .85fr; align-items: start; }
     .options { margin-top: 10px; }
+    .blocos { grid-template-columns: 1fr 1fr; gap: 16px 24px; }
     .results { grid-template-columns: repeat(3, 1fr); }
     .res { padding: 30px 28px 28px; }
     .case { grid-template-columns: .95fr 1.05fr; gap: 48px; padding: 40px; }
@@ -516,7 +528,8 @@
       <div>
         <div class="kicker rv"><b></b>Consultora em dados · BI, analytics e automação</div>
         <h1 id="h1" class="rv d1">Dados que ajudam empresas a <span class="serif">decidir melhor</span> e operar com mais eficiência.</h1>
-        <p class="lead rv d2">Desenvolvo dashboards, análises e automações que transformam dados em soluções práticas: da definição dos indicadores à implementação. Especialidade em retenção e churn.</p>
+        <p class="lead rv d2">Desenvolvo dashboards, análises e automações para transformar dados em soluções práticas, reduzir ineficiências e melhorar resultados: da definição dos indicadores à implementação.</p>
+        <a class="spec rv d2" href="#caso">Especialidade: descubro por que seus clientes vão embora <span aria-hidden="true">→</span></a>
         <div class="ctas rv d3">
           <a class="btn btn-accent" href="#contato">Conversar sobre um projeto
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -576,24 +589,24 @@
           <div class="top"><span class="n">01</span><span class="pill">Serviço principal</span></div>
           <div class="wide-grid">
             <div>
-              <h3>Business Intelligence e dashboards</h3>
-              <p class="for">Para gestores que decidem com números espalhados, desatualizados ou em que ninguém confia. O objetivo não é ter gráficos: é ter uma ferramenta de gestão que mostre o que está acontecendo e onde agir.</p>
-              <h4>O que eu faço</h4>
-              <ul>
-                <li>Levanto as perguntas que a gestão precisa responder</li>
-                <li>Defino KPIs, regras de negócio e metas de acompanhamento</li>
-                <li>Mapeio, trato e modelo os dados, com a engenharia quando é preciso</li>
-                <li>Desenvolvo dashboards executivos, comerciais, financeiros, operacionais, de RH e de Produto</li>
-                <li>Incluo filtros, rankings, comparativos e alertas para desvios</li>
-                <li>Automatizo a atualização quando as fontes e as ferramentas permitem</li>
-              </ul>
+              <h3>Business Intelligence e desenvolvimento de dashboards</h3>
+              <p class="for"><b>O problema:</b> dados dispersos, desatualizados ou em que ninguém confia. Desenvolvo dashboards gerenciais, comerciais, financeiros e operacionais que transformam esses dados em informação clara, confiável e útil para a gestão. O objetivo não é apresentar gráficos: é ter uma ferramenta de gestão para entender o que está acontecendo, identificar problemas e decidir melhor.</p>
+              <div class="blocos">
+                <div><h4>Entendimento do negócio</h4><p>Necessidades dos gestores, as perguntas que precisam ser respondidas, objetivos e escopo da solução.</p></div>
+                <div><h4>Definição de indicadores</h4><p>KPIs, regras de negócio, padronização de métricas e, quando faz sentido, metas e critérios de acompanhamento.</p></div>
+                <div><h4>Dados e modelagem</h4><p>Mapeamento das fontes, organização e tratamento, modelagem para análise e alinhamento com a engenharia para disponibilizar e integrar os dados, quando necessário.</p></div>
+                <div><h4>Desenvolvimento de dashboards</h4><p>Executivos, gerenciais, comerciais, financeiros, operacionais, de RH e de Produto, com filtros, rankings, comparativos e alertas para desvios e situações críticas, cada visão pensada para quem vai usar.</p></div>
+                <div><h4>Automação e implementação</h4><p>Automação de relatórios e da atualização conforme as ferramentas disponíveis, rotina de acompanhamento, apoio ao uso gerencial e evolução das visões com o negócio.</p></div>
+              </div>
+              <p class="ind"><b>Indicado para</b> gestores e empresas que precisam de uma visão confiável do negócio, de um painel específico até uma solução de BI completa.</p>
             </div>
             <div>
               <h4>Duas formas de contratar</h4>
               <div class="options">
-                <div><b>Projeto de dashboard</b><span>Um painel específico, com escopo e entregas definidos antes de começar.</span></div>
-                <div><b>Projeto completo de BI</b><span>Diagnóstico, mapeamento dos dados, indicadores, modelagem, dashboard e rotina de acompanhamento.</span></div>
+                <div><b>Projeto de dashboard</b><span>Uma solução específica, com escopo e entregáveis definidos antes de começar.</span></div>
+                <div><b>Projeto completo de BI</b><span>Diagnóstico, mapeamento dos dados, definição de indicadores, modelagem, desenvolvimento do dashboard e implementação do acompanhamento.</span></div>
               </div>
+              <p class="note-ia">Integração e atualização automática dependem das fontes, dos acessos e das ferramentas que a empresa já tem. Isso é avaliado antes da proposta.</p>
               <a class="go" href="mailto:isaignacio1@gmail.com?subject=Projeto%20de%20dashboard">Pedir proposta de dashboard
                 <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
@@ -603,15 +616,19 @@
         <article class="offer rv">
           <div class="top"><span class="n">02</span><span class="pill soft">Especialidade: retenção e churn</span></div>
           <h3>Analytics e inteligência de negócios</h3>
-          <p class="for">Para investigar um problema, entender o desempenho e decidir o que priorizar.</p>
+          <p class="for"><b>O problema:</b> o resultado mudou e ninguém sabe dizer por quê. Investigo o problema, avalio as alternativas e mostro quais ações priorizar.</p>
           <h4>Você recebe</h4>
           <ul>
-            <li>Diagnóstico de desempenho e de indicadores comerciais e financeiros</li>
-            <li>Segmentação e comportamento de clientes</li>
+            <li>Diagnóstico de desempenho</li>
+            <li>Análise de indicadores comerciais e financeiros</li>
+            <li>Comportamento e segmentação de clientes</li>
             <li>Retenção, churn e reativação</li>
-            <li>Avaliação de campanhas e ofertas com grupo de controle</li>
-            <li>Gargalos, oportunidades e recomendações com evidência</li>
+            <li>Avaliação de campanhas e ofertas</li>
+            <li>Análise comparativa de resultados</li>
+            <li>Desempenho operacional, gargalos e oportunidades</li>
+            <li>Recomendações estratégicas baseadas em evidências</li>
           </ul>
+          <p class="ind"><b>Indicado para</b> empresas que precisam entender o desempenho antes de decidir onde investir.</p>
           <a class="go" href="saas/">Ver o Raio-X de churn para SaaS
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
@@ -619,16 +636,18 @@
         <article class="offer rv d1">
           <div class="top"><span class="n">03</span></div>
           <h3>Automação e eficiência operacional</h3>
-          <p class="for">Para reduzir trabalho manual, retrabalho e risco operacional.</p>
+          <p class="for"><b>O problema:</b> trabalho manual, retrabalho, ineficiência e risco operacional. O diferencial é combinar a melhoria do processo, a organização dos dados e a tecnologia.</p>
           <h4>Você recebe</h4>
           <ul>
-            <li>Automação de relatórios e de rotinas analíticas</li>
+            <li>Automação de relatórios, processos e rotinas analíticas</li>
+            <li>IA em tarefas repetitivas, como a classificação automatizada de informações</li>
+            <li>Simplificação de processos</li>
             <li>Alertas preventivos e mecanismos de controle</li>
-            <li>Simplificação do processo antes de automatizar</li>
-            <li>IA aplicada a tarefas repetitivas, como classificar textos</li>
+            <li>Oportunidades de redução de custos</li>
             <li>Ferramentas de apoio à operação comercial</li>
           </ul>
-          <p class="note-ia">IA entra quando resolve um problema específico. Antes, valido as regras com amostras reais e defino onde a revisão humana continua.</p>
+          <p class="note-ia">IA não é solução para tudo. Ela entra quando resolve um problema específico, como classificar textos. Antes, valido as regras com amostras reais e defino onde a revisão humana continua.</p>
+          <p class="ind"><b>Indicado para</b> equipes que gastam horas por semana em tarefas que se repetem.</p>
           <a class="go" href="mailto:isaignacio1@gmail.com?subject=Automa%C3%A7%C3%A3o%20de%20processo">Pedir proposta
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
@@ -636,15 +655,18 @@
         <article class="offer rv">
           <div class="top"><span class="n">04</span></div>
           <h3>Estratégia de dados e métricas</h3>
-          <p class="for">Para definir o que acompanhar, como medir sucesso e o que fazer quando o número muda.</p>
+          <p class="for"><b>O problema:</b> muitos números e pouca clareza sobre o que acompanhar. Entrego uma estrutura de acompanhamento para interpretar resultados, identificar desvios e agir, com cada métrica ligada à decisão que ela orienta.</p>
           <h4>Você recebe</h4>
           <ul>
             <li>Definição e padronização de KPIs</li>
-            <li>Health Metrics de Produto e da jornada do cliente</li>
-            <li>Métricas de experimentos: critério de sucesso e indicadores de proteção</li>
+            <li>Estruturação de métricas de negócio</li>
+            <li>Health Metrics de Produto</li>
+            <li>Indicadores consolidados da jornada do cliente</li>
+            <li>Métricas para experimentos: critérios de sucesso e indicadores de proteção</li>
             <li>Modelos de acompanhamento gerencial</li>
-            <li>Cada métrica ligada à decisão que ela orienta</li>
+            <li>Riscos e oportunidades identificados pelos indicadores</li>
           </ul>
+          <p class="ind"><b>Indicado para</b> times de Produto e gestores que precisam definir como medir sucesso.</p>
           <a class="go" href="mailto:isaignacio1@gmail.com?subject=Estrat%C3%A9gia%20de%20m%C3%A9tricas">Pedir proposta
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
@@ -759,6 +781,7 @@
               <div><dt>O impacto</dt><dd>As decisões comerciais passaram a se apoiar em teste, não em opinião.</dd></div>
             </dl>
             <p class="fine">TPV é o volume transacionado pelos clientes, não receita nem lucro. Os 166% são o ganho relativo frente à referência de controle usada. O +1,7 p.p. é de uma análise preliminar.</p>
+            <a class="more" href="#caso">Ver a abordagem por perguntas em detalhe, com gráficos reais ↓</a>
           </div>
         </article>
 
@@ -797,9 +820,9 @@
     <div class="wrap">
       <div class="case-intro">
         <div class="head rv" style="margin-bottom:0">
-          <span class="tag">Caso aberto · retenção com dados reais</span>
+          <span class="tag">Retenção e churn em detalhe · caso aberto</span>
           <h2 id="h-caso">Um app por assinatura, três contas de pagamento e uma pergunta: <span class="serif">por que os clientes saem?</span></h2>
-          <p>Os pagamentos estavam espalhados em três contas, o tráfego pago vinha de anúncios e não existia uma visão única de quem ficava. Organizei a análise em três perguntas.</p>
+          <p>A mesma abordagem por perguntas de negócio, aplicada a um app por assinatura, com os dados reais. Os pagamentos estavam espalhados em três contas, o tráfego pago vinha de anúncios e não existia uma visão única de quem ficava. Organizei a análise em três perguntas.</p>
         </div>
         <div class="facts rv d1">
           <div><b>3</b><span>contas de pagamento</span></div>
@@ -926,8 +949,12 @@
           <span class="tag">Sobre</span>
           <h2 id="h-sobre">Engenheira de formação. <span class="serif">Especialista em dados por escolha.</span></h2>
         </div>
-        <p class="quote rv">Conecto o lado técnico do dado <span class="serif">às decisões de negócio</span> que ele precisa orientar.</p>
-        <p class="quote-by rv">Foi no mestrado, analisando dados experimentais, que a análise virou profissão. Desde 2021 trabalho com dados em empresas de grande porte: gestão de pessoas, comércio exterior, serviços financeiros e educação. Como professora de Cálculo, aprendi a explicar o complexo de forma simples.</p>
+        <p class="quote rv">Transformo dados em soluções práticas para reduzir ineficiências, melhorar resultados e <span class="serif">apoiar decisões de negócio,</span> da estruturação dos indicadores ao desenvolvimento de dashboards e à automação de processos.</p>
+        <p class="quote-by rv">Foi no mestrado, analisando dados experimentais, que a análise virou profissão. Desde 2021 trabalho com dados em empresas de grande porte: gestão de pessoas, comércio exterior, serviços financeiros e educação. Engenharia, mestrado, dados e sala de aula: como professora de Cálculo, aprendi a lidar com problemas quantitativos complexos e a explicar o técnico com clareza.</p>
+        <p class="e2e-t rv">De ponta a ponta</p>
+        <ol class="e2e rv">
+          <li>Entender o problema de negócio</li><li>Investigar as causas com dados</li><li>Achar gargalos e oportunidades</li><li>Definir indicadores e regras</li><li>Estruturar e integrar os dados</li><li>Construir dashboards e modelos</li><li>Automatizar rotinas</li><li>Interpretar e propor ações</li><li>Apoiar a implementação</li><li>Acompanhar o resultado</li>
+        </ol>
         <div class="creds rv">
           <div><b>Mestre</b><span>em Ciências Térmicas pela Unesp</span></div>
           <div><b>7</b><span>publicações científicas</span></div>
@@ -1036,7 +1063,7 @@
     <div class="wrap">
       <span class="tag rv" style="color:#7FC4CC">Contato</span>
       <h2 id="h-cta" class="rv" style="margin-top:16px">Qual problema os seus dados <span class="serif">podem ajudar a resolver?</span></h2>
-      <p class="rv">Me conte o contexto. Eu respondo dizendo se e como posso ajudar: um dashboard, uma análise, uma automação ou um projeto completo.</p>
+      <p class="rv">Não entrego apenas relatórios ou análises. Desenvolvo soluções orientadas por dados para ajudar empresas a reduzir ineficiências, melhorar resultados e tomar decisões melhores. Me conte o contexto: um dashboard, uma análise, uma automação ou um projeto completo.</p>
       <div class="ctas rv">
         <a class="btn btn-accent" href="mailto:isaignacio1@gmail.com?subject=Contato%20pelo%20site">Mandar e-mail
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
