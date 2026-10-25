@@ -9,7 +9,7 @@ Site no ar em **isabelaignacio.com.br** (enquanto o domínio não abre, use isab
 | Página | Arquivo | O que tem |
 |---|---|---|
 | Início | `index.html` | Topo, serviços, resultados, cases, caso aberto, outros projetos, sobre, ensino, perguntas e contato |
-| Case MoneyMio | `caso/index.html` | O case completo com os prints do painel |
+| Case de retenção | `caso/index.html` | O case completo com os prints do painel |
 | Para SaaS | `saas/index.html` | Raio-X de churn, **preços** e perguntas frequentes |
 | Currículo acadêmico | `curriculo/Isabela-Ignacio-Curriculo-Academico.pdf` | O PDF que o botão "Baixar currículo acadêmico" baixa |
 | Fonte do currículo | `curriculo/curriculo.html` | Edite aqui e gere o PDF de novo (abrir no navegador, imprimir, salvar como PDF, tamanho A4, sem cabeçalho) |
