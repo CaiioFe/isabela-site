@@ -109,3 +109,29 @@
     }
   });
 })();
+
+// Contador de visitas: avisa o editor (aba Visitas) a cada página aberta.
+// Sem cookie, sem IP: só a página, o domínio de onde a pessoa veio, celular ou computador e um código aleatório do aparelho.
+// Quem abrir o site com ?nao-contar=1 deixa de ser contado naquele aparelho (para a Isabela não contar a si mesma).
+(function () {
+  if (!/(^|\.)isabelaignacio\.com\.br$/.test(location.hostname) || navigator.webdriver) return;
+  var ls = null; try { ls = window.localStorage; } catch (e) {}
+  var q = new URLSearchParams(location.search);
+  if (q.has('nao-contar')) { try { ls.setItem('isa_nao_contar', '1'); } catch (e) {} return; }
+  try { if (ls && ls.getItem('isa_nao_contar')) return; } catch (e) {}
+  var vid = null;
+  try { vid = ls.getItem('isa_vid'); if (!vid) { vid = Math.random().toString(36).slice(2) + Date.now().toString(36); ls.setItem('isa_vid', vid); } } catch (e) {}
+  var origem = q.get('utm_source') || '';
+  if (!origem && document.referrer) {
+    try { var h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (!/isabelaignacio\.com\.br$/.test(h)) origem = h; } catch (e) {}
+  }
+  var dados = JSON.stringify({
+    pagina: location.pathname, origem: origem, visitante: vid || '',
+    dispositivo: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'celular' : 'computador'
+  });
+  var url = 'https://isabela-editor.vercel.app/api/visita';
+  // texto puro não dispara a checagem de CORS do navegador; a resposta não importa
+  if (!(navigator.sendBeacon && navigator.sendBeacon(url, new Blob([dados], { type: 'text/plain' })))) {
+    fetch(url, { method: 'POST', body: dados, keepalive: true, mode: 'no-cors' }).catch(function () {});
+  }
+})();
